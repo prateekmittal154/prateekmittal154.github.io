@@ -1,0 +1,145 @@
+---
+import type { Publication } from '../data/publications';
+
+interface Props {
+  pub: Publication;
+}
+
+const { pub } = Astro.props;
+---
+
+<article class="group relative rounded-xl border border-stone-200/90 dark:border-stone-800/90 bg-white/70 dark:bg-stone-900/60 p-6 backdrop-blur-sm hover:border-gold-500/60 dark:hover:border-gold-500/60 transition-all shadow-sm hover:shadow-md">
+  <!-- Badges -->
+  {pub.badges && pub.badges.length > 0 && (
+    <div class="flex flex-wrap gap-2 mb-3">
+      {pub.badges.map((b) => {
+        const isHighlight = b.includes('Oral') || b.includes('Travel Grant') || b.includes('TMLR') || b.includes('MICCAI 2026');
+        return (
+          <span
+            class={`text-xs px-2.5 py-0.5 rounded-full font-mono tracking-tight ${
+              isHighlight
+                ? 'bg-amber-100 text-amber-900 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-300 dark:border-amber-700 font-semibold'
+                : 'bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300 border border-stone-200 dark:border-stone-700'
+            }`}
+          >
+            {b}
+          </span>
+        );
+      })}
+    </div>
+  )}
+
+  <!-- Title -->
+  <h3 class="font-editorial text-xl font-semibold text-stone-900 dark:text-stone-100 leading-snug group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
+    {pub.url ? (
+      <a href={pub.url} target="_blank" rel="noopener noreferrer" class="hover:underline">
+        {pub.title}
+      </a>
+    ) : (
+      pub.title
+    )}
+  </h3>
+
+  <!-- Authors -->
+  <p class="text-sm text-stone-600 dark:text-stone-400 mt-2">
+    {pub.authors.map((author, index) => {
+      const isPrateek = author.includes('Prateek Mittal');
+      return (
+        <span>
+          <span class={isPrateek ? 'font-semibold text-stone-900 dark:text-stone-100 underline decoration-gold-500 underline-offset-2' : ''}>
+            {author}
+          </span>
+          {index < pub.authors.length - 1 && ', '}
+        </span>
+      );
+    })}
+  </p>
+
+  <!-- Venue -->
+  <p class="text-xs text-stone-500 dark:text-stone-400 italic mt-1 font-editorial text-base">
+    {pub.venue} ({pub.year})
+  </p>
+
+  <!-- Abstract Excerpt if present -->
+  {pub.abstract && (
+    <p class="text-xs text-stone-600 dark:text-stone-400 mt-3 line-clamp-2 leading-relaxed font-sans">
+      {pub.abstract}
+    </p>
+  )}
+
+  <!-- Actions / Links -->
+  <div class="mt-4 pt-3 border-t border-stone-100 dark:border-stone-800/80 flex flex-wrap items-center gap-3 text-xs">
+    {pub.url && (
+      <a
+        href={pub.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1 text-gold-600 dark:text-gold-400 hover:underline font-medium"
+      >
+        <span>View Paper</span>
+        <span>&rarr;</span>
+      </a>
+    )}
+    {pub.doi && (
+      <a
+        href={`https://doi.org/${pub.doi}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-stone-500 hover:text-stone-900 dark:hover:text-stone-200 font-mono"
+      >
+        DOI: {pub.doi}
+      </a>
+    )}
+
+    <!-- BibTeX Toggle Button -->
+    <button
+      type="button"
+      data-bibtex-trigger={pub.id}
+      class="ml-auto text-stone-500 hover:text-gold-600 dark:hover:text-gold-400 font-mono text-[11px] px-2 py-0.5 rounded border border-stone-200 dark:border-stone-700 hover:border-gold-500"
+    >
+      Cite (BibTeX)
+    </button>
+  </div>
+
+  <!-- Expandable BibTeX Drawer -->
+  <div id={`bibtex-${pub.id}`} class="hidden mt-3 pt-3 border-t border-stone-200 dark:border-stone-800">
+    <div class="relative">
+      <pre class="bg-stone-900 text-stone-200 p-3 rounded text-[11px] font-mono overflow-x-auto leading-relaxed">{pub.bibtex}</pre>
+      <button
+        type="button"
+        data-copy-bibtex={pub.bibtex}
+        class="absolute top-2 right-2 px-2 py-1 bg-stone-800 hover:bg-gold-600 text-white rounded text-[10px] font-mono transition-colors"
+      >
+        Copy
+      </button>
+    </div>
+  </div>
+</article>
+
+<script is:inline>
+  document.querySelectorAll('[data-bibtex-trigger]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const id = button.getAttribute('data-bibtex-trigger');
+      const drawer = document.getElementById(`bibtex-${id}`);
+      if (drawer) {
+        drawer.classList.toggle('hidden');
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-copy-bibtex]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const text = button.getAttribute('data-copy-bibtex');
+      if (text) {
+        await navigator.clipboard.writeText(text);
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('bg-green-700');
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.classList.remove('bg-green-700');
+        }, 2000);
+      }
+    });
+  });
+</script>

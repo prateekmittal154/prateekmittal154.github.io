@@ -1,0 +1,94 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const navItems = [
+  { label: 'Writing', href: '/writing' },
+  { label: 'Research', href: '/research' },
+  { label: 'Journey', href: '/journey' },
+  { label: 'Moments', href: '/moments' },
+  { label: 'About', href: '/about' },
+];
+
+const pathname = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 backdrop-blur-md bg-parchment-50/80 dark:bg-ink-900/80 border-b border-stone-200/80 dark:border-stone-800/80 transition-colors">
+  <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- Brand -->
+    <a href="/" class="group flex items-baseline gap-2">
+      <span class="font-editorial text-2xl font-semibold tracking-tight text-stone-900 dark:text-stone-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
+        Prateek Mittal
+      </span>
+      <span class="hidden sm:inline-block text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500 font-mono">
+        Atelier & Research
+      </span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-7">
+      {navItems.map((item) => {
+        const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+        return (
+          <a
+            href={item.href}
+            class={`text-sm font-medium transition-all relative py-1 ${
+              isActive
+                ? 'text-gold-600 dark:text-gold-400 font-semibold'
+                : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
+            }`}
+          >
+            {item.label}
+            {isActive && (
+              <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-gold-500 rounded-full" />
+            )}
+          </a>
+        );
+      })}
+
+      <!-- Separator -->
+      <div class="w-px h-4 bg-stone-300 dark:bg-stone-700" />
+
+      <!-- Theme Switcher -->
+      <ThemeToggle />
+    </nav>
+
+    <!-- Mobile Nav Button -->
+    <div class="flex items-center gap-2 md:hidden">
+      <ThemeToggle />
+      <button
+        id="mobile-menu-button"
+        type="button"
+        class="p-2 text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white"
+        aria-label="Toggle navigation menu"
+      >
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown -->
+  <div id="mobile-menu" class="hidden md:hidden border-b border-stone-200 dark:border-stone-800 bg-parchment-100 dark:bg-ink-850 px-6 py-4">
+    <div class="flex flex-col gap-3">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="text-base py-1.5 text-stone-700 dark:text-stone-300 hover:text-gold-600 dark:hover:text-gold-400 font-medium"
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  const menuBtn = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+  if (menuBtn && menu) {
+    menuBtn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  }
+</script>

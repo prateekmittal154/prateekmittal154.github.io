@@ -1,0 +1,128 @@
+@import 'katex/dist/katex.min.css';
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Noto+Serif+Devanagari:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #FDFBF7;
+    --bg-secondary: #F7F3E9;
+    --bg-card: rgba(255, 255, 255, 0.85);
+    --border-color: #E6DFD3;
+    --text-primary: #1C1917;
+    --text-secondary: #57534E;
+    --text-muted: #8C857B;
+    --accent-gold: #B45309;
+    --accent-gold-soft: #FDE68A;
+  }
+
+  .dark {
+    --bg-primary: #090C10;
+    --bg-secondary: #0F141C;
+    --bg-card: rgba(15, 20, 28, 0.75);
+    --border-color: #1E2633;
+    --text-primary: #EDEDED;
+    --text-secondary: #A0AEC0;
+    --text-muted: #64748B;
+    --accent-gold: #D97706;
+    --accent-gold-soft: #78350F;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--accent-gold);
+    color: #FFFFFF;
+  }
+}
+
+/* Atmospheric Noise / Paper Grain Texture */
+.ambient-glow {
+  position: absolute;
+  top: -150px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217, 119, 6, 0.08) 0%, rgba(217, 119, 6, 0) 70%);
+  pointer-events: none;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+.ambient-glow-left {
+  position: absolute;
+  top: 400px;
+  left: -200px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(180, 83, 9, 0.05) 0%, rgba(180, 83, 9, 0) 70%);
+  pointer-events: none;
+  filter: blur(80px);
+  z-index: 0;
+}
+
+/* Editorial & Poetry Typography */
+.font-editorial {
+  font-family: 'Newsreader', 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-devanagari {
+  font-family: 'Noto Serif Devanagari', 'Newsreader', serif;
+}
+
+/* Poetry Stanza Layout */
+.poetry-container {
+  font-family: 'Noto Serif Devanagari', 'Newsreader', serif;
+  font-size: 1.22rem;
+  line-height: 2.1;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  max-width: 44ch;
+  margin: 2.5rem auto;
+  padding: 1.5rem 1rem;
+}
+
+.poetry-container p {
+  margin-bottom: 2rem;
+}
+
+.poetry-container hr {
+  border: none;
+  text-align: center;
+  margin: 2.5rem 0;
+}
+
+.poetry-container hr::before {
+  content: '✦   ✦   ✦';
+  letter-spacing: 0.6em;
+  font-size: 0.85rem;
+  color: var(--accent-gold);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(140, 133, 123, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}

@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PublicationCard from '../components/PublicationCard.astro';
+import { publications } from '../data/publications';
+import { profile } from '../data/profile';
+
+const types = [
+  { id: 'all', label: 'All Works' },
+  { id: 'journal', label: 'Journals (TMLR, HPT)' },
+  { id: 'conference', label: 'Conferences (MICCAI, ICLR)' },
+  { id: 'preprint', label: 'Preprints (medRxiv, bioRxiv)' },
+  { id: 'presentation', label: 'Presentations & Talks' },
+];
+---
+
+<BaseLayout
+  title="Research & Publications — Prateek Mittal"
+  description="Peer-reviewed publications, preprints, and presentations across medical imaging, high-dimensional robust learning, clinical Graph-RAG, and healthcare AI governance."
+>
+  <div class="max-w-5xl mx-auto px-6 py-16">
+    <!-- Header -->
+    <div class="max-w-3xl mb-12">
+      <span class="text-xs font-mono uppercase tracking-widest text-gold-600 dark:text-gold-400 block mb-2">
+        Scholar's Archive
+      </span>
+      <h1 class="font-editorial text-4xl sm:text-5xl font-semibold text-stone-900 dark:text-stone-50 tracking-tight mb-4">
+        Publications & Preprints
+      </h1>
+      <p class="text-base sm:text-lg text-stone-600 dark:text-stone-400 font-editorial italic leading-relaxed">
+        Investigating medical foundation models, differential geometric representations of lesions, robust estimation, and clinical AI accountability.
+      </p>
+    </div>
+
+    <!-- Highlights Banner -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 p-6 rounded-2xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-800/40">
+      <div>
+        <span class="text-2xl font-editorial font-bold text-gold-600 dark:text-gold-400">MICCAI 2026</span>
+        <p class="text-xs font-mono text-stone-600 dark:text-stone-300 mt-1">
+          5 accepted contributions · 3 Oral presentations · Society Travel Grant recipient
+        </p>
+      </div>
+      <div>
+        <span class="text-2xl font-editorial font-bold text-stone-900 dark:text-stone-100">Foundations</span>
+        <p class="text-xs font-mono text-stone-600 dark:text-stone-300 mt-1">
+          BrainLM at ICLR (6,700h fMRI model) & TMLR robust subsampling theory
+        </p>
+      </div>
+      <div>
+        <span class="text-2xl font-editorial font-bold text-gold-600 dark:text-gold-400">Peer Review</span>
+        <p class="text-xs font-mono text-stone-600 dark:text-stone-300 mt-1">
+          Reviewer for ICLR 2026, NeurIPS 2026, ACM TIST, IEEE SIST
+        </p>
+      </div>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 pb-6 border-b border-stone-200 dark:border-stone-800">
+      <div class="flex flex-wrap gap-2" id="pub-filters">
+        {types.map((type) => (
+          <button
+            type="button"
+            data-type={type.id}
+            class={`text-xs font-mono px-3 py-1.5 rounded-full border transition-all ${
+              type.id === 'all'
+                ? 'bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 border-stone-900 dark:border-stone-100 font-semibold'
+                : 'border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:border-gold-500 hover:text-gold-600 dark:hover:text-gold-400 bg-white/50 dark:bg-stone-900/40'
+            }`}
+          >
+            {type.label}
+          </button>
+        ))}
+      </div>
+
+      <div class="relative w-full md:w-64">
+        <input
+          type="text"
+          id="pub-search-input"
+          placeholder="Search by title, author, topic..."
+          class="w-full text-xs font-mono px-3 py-2 pl-8 rounded-lg border border-stone-200 dark:border-stone-800 bg-white/70 dark:bg-stone-900/60 text-stone-900 dark:text-stone-100 focus:outline-none focus:border-gold-500 placeholder:text-stone-400"
+        />
+        <svg class="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Publications List -->
+    <div class="space-y-6" id="pubs-list">
+      {publications.map((pub) => (
+        <div
+          class="pub-item"
+          data-type={pub.type}
+          data-search={`${pub.title.toLowerCase()} ${pub.authors.join(' ').toLowerCase()} ${pub.venue.toLowerCase()} ${(pub.badges || []).join(' ').toLowerCase()}`}
+        >
+          <PublicationCard pub={pub} />
+        </div>
+      ))}
+    </div>
+
+    <div id="no-pubs" class="hidden text-center py-20 text-stone-500 font-editorial text-lg italic">
+      No publications found matching your filter criteria.
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  const pubButtons = document.querySelectorAll('#pub-filters button');
+  const pubItems = document.querySelectorAll('.pub-item');
+  const pubSearchInput = document.getElementById('pub-search-input');
+  const noPubs = document.getElementById('no-pubs');
+
+  let activeType = 'all';
+  let pubQuery = '';
+
+  function filterPubs() {
+    let count = 0;
+    pubItems.forEach((item) => {
+      const type = item.getAttribute('data-type');
+      const search = item.getAttribute('data-search') || '';
+
+      const matchType = activeType === 'all' || type === activeType;
+      const matchQuery = !pubQuery || search.includes(pubQuery);
+
+      if (matchType && matchQuery) {
+        item.style.display = 'block';
+        count++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    if (noPubs) {
+      if (count === 0) noPubs.classList.remove('hidden');
+      else noPubs.classList.add('hidden');
+    }
+  }
+
+  pubButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      pubButtons.forEach((b) => {
+        b.classList.remove('bg-stone-900', 'text-white', 'dark:bg-stone-100', 'dark:text-stone-900', 'font-semibold');
+        b.classList.add('text-stone-600', 'dark:text-stone-400');
+      });
+      btn.classList.add('bg-stone-900', 'text-white', 'dark:bg-stone-100', 'dark:text-stone-900', 'font-semibold');
+      btn.classList.remove('text-stone-600', 'dark:text-stone-400');
+
+      activeType = btn.getAttribute('data-type') || 'all';
+      filterPubs();
+    });
+  });
+
+  if (pubSearchInput) {
+    pubSearchInput.addEventListener('input', (e) => {
+      pubQuery = e.target.value.toLowerCase().trim();
+      filterPubs();
+    });
+  }
+</script>

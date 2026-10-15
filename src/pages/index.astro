@@ -1,0 +1,303 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PublicationCard from '../components/PublicationCard.astro';
+import { profile } from '../data/profile';
+import { publications } from '../data/publications';
+import { moments } from '../data/moments';
+import { getCollection } from 'astro:content';
+
+const featuredPublications = publications.filter((p) =>
+  ['miccai-2026-inverse-protocol', 'tmlr-2026-subsampling', 'iclr-2024-brainlm'].includes(p.id)
+);
+
+const allWritings = await getCollection('writing');
+const featuredWritings = allWritings
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const previewMoments = moments.slice(0, 3);
+---
+
+<BaseLayout>
+  <!-- Hero Section -->
+  <section class="max-w-5xl mx-auto px-6 pt-16 md:pt-24 pb-16">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+      <!-- Text Column -->
+      <div class="md:col-span-8 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-stone-100 dark:bg-stone-800/80 border border-stone-200 dark:border-stone-700 text-stone-700 dark:text-stone-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Accenture AI Decision Science & Medical AI Researcher</span>
+        </div>
+
+        <h1 class="font-editorial text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-stone-900 dark:text-stone-50 leading-[1.08]">
+          Prateek Mittal
+        </h1>
+
+        <p class="font-editorial italic text-2xl sm:text-3xl text-stone-700 dark:text-stone-300 leading-snug">
+          Where empirical intelligence meets the quietude of human consciousness.
+        </p>
+
+        <p class="text-base sm:text-lg text-stone-600 dark:text-stone-400 font-sans leading-relaxed max-w-2xl">
+          Decision science analyst at Accenture, medical-AI researcher across MICCAI, TMLR, and ICLR (BrainLM), and founder of the Foundation for Ethical AI in Healthcare. In quieter moments, a wayfarer of philosophy and poet of inner dwellings.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a
+            href="/writing"
+            class="px-5 py-2.5 rounded-lg bg-stone-900 hover:bg-gold-600 text-white dark:bg-stone-100 dark:text-stone-900 dark:hover:bg-gold-400 dark:hover:text-stone-950 text-sm font-medium transition-all shadow-sm"
+          >
+            The Writing Codex &rarr;
+          </a>
+          <a
+            href="/research"
+            class="px-5 py-2.5 rounded-lg border border-stone-300 dark:border-stone-700 hover:border-gold-500 dark:hover:border-gold-500 text-stone-800 dark:text-stone-200 text-sm font-medium transition-all"
+          >
+            Research & Papers
+          </a>
+          <a
+            href="/moments"
+            class="px-5 py-2.5 rounded-lg border border-stone-200 dark:border-stone-800 hover:border-stone-400 text-stone-600 dark:text-stone-400 text-sm font-medium transition-all"
+          >
+            Visual Moments
+          </a>
+        </div>
+
+        <!-- Social Badges -->
+        <div class="flex flex-wrap items-center gap-4 pt-2 text-xs font-mono text-stone-500 dark:text-stone-400">
+          <span>Connect:</span>
+          {profile.social.map((s) => (
+            <a
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-gold-600 dark:hover:text-gold-400 underline decoration-stone-300 dark:decoration-stone-700 underline-offset-2"
+            >
+              {s.name}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Editorial Portrait / Aesthetic Card Column -->
+      <div class="md:col-span-4 flex justify-center">
+        <div class="relative group">
+          <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-gold-500/20 to-amber-500/20 blur-lg group-hover:opacity-100 opacity-60 transition duration-500"></div>
+          <div class="relative w-64 h-80 sm:w-72 sm:h-96 rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-700/80 bg-stone-100 dark:bg-stone-900 shadow-xl">
+            <img
+              src={profile.avatar}
+              alt="Prateek Mittal Portrait"
+              class="w-full h-full object-cover grayscale-[15%] contrast-[1.05] group-hover:scale-105 transition-transform duration-700"
+            />
+            <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-stone-950/90 via-stone-950/50 to-transparent text-white">
+              <p class="font-editorial text-sm font-semibold tracking-wide">Prateek Mittal</p>
+              <p class="text-[11px] font-mono text-stone-300">Gurugram & Faridabad, India</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Distinctions Ticker Banner -->
+  <section class="border-y border-stone-200/80 dark:border-stone-800/80 bg-stone-50/70 dark:bg-ink-950/40 py-6 transition-colors">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div class="space-y-1">
+          <span class="text-2xl font-editorial font-bold text-gold-600 dark:text-gold-400">MICCAI '26</span>
+          <p class="text-xs font-mono text-stone-600 dark:text-stone-400">Travel Grant & 3 Orals</p>
+        </div>
+        <div class="space-y-1">
+          <span class="text-2xl font-editorial font-bold text-stone-900 dark:text-stone-100">TMLR</span>
+          <p class="text-xs font-mono text-stone-600 dark:text-stone-400">High-Dim Subsampling</p>
+        </div>
+        <div class="space-y-1">
+          <span class="text-2xl font-editorial font-bold text-stone-900 dark:text-stone-100">BrainLM</span>
+          <p class="text-xs font-mono text-stone-600 dark:text-stone-400">ICLR 2024 (Yale)</p>
+        </div>
+        <div class="space-y-1">
+          <span class="text-2xl font-editorial font-bold text-gold-600 dark:text-gold-400">BITS Pilani</span>
+          <p class="text-xs font-mono text-stone-600 dark:text-stone-400">M.Sc. Data Science (9.50)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Two Hemispheres: The Polymath's Duality -->
+  <section class="max-w-5xl mx-auto px-6 py-20">
+    <div class="text-center max-w-xl mx-auto mb-14">
+      <span class="text-xs font-mono uppercase tracking-widest text-gold-600 dark:text-gold-400 block mb-2">
+        The Dual Architecture
+      </span>
+      <h2 class="font-editorial text-3xl sm:text-4xl font-semibold text-stone-900 dark:text-stone-100">
+        The Two Hemispheres
+      </h2>
+      <p class="text-sm text-stone-600 dark:text-stone-400 font-sans mt-2">
+        Not contradictory worlds, but complementary frequencies of one inquiry.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Empirical Horizon -->
+      <div class="p-8 rounded-2xl border border-stone-200 dark:border-stone-800 bg-white/60 dark:bg-stone-900/40 backdrop-blur-sm space-y-4 hover:border-gold-500/50 transition-all">
+        <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-950/60 flex items-center justify-center text-amber-700 dark:text-amber-400 text-lg font-mono">
+          🔬
+        </div>
+        <h3 class="font-editorial text-2xl font-semibold text-stone-900 dark:text-stone-100">
+          The Empirical Horizon
+        </h3>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Grounding intelligence in mathematical truth. From Laplace–Beltrami spectral analysis of 3D brain lesions to high-dimensional subsampling algorithms and foundation neuroimaging models (BrainLM).
+        </p>
+        <ul class="text-xs font-mono space-y-2 text-stone-500 dark:text-stone-400 pt-2 border-t border-stone-100 dark:border-stone-800">
+          <li>✦ Differential Geometry & Topology</li>
+          <li>✦ Clinical Graph-RAG (SNOMED-CT)</li>
+          <li>✦ Robust High-Dimensional Estimation</li>
+          <li>✦ Production GenAI & Decision Science</li>
+        </ul>
+      </div>
+
+      <!-- Contemplative Horizon -->
+      <div class="p-8 rounded-2xl border border-stone-200 dark:border-stone-800 bg-white/60 dark:bg-stone-900/40 backdrop-blur-sm space-y-4 hover:border-gold-500/50 transition-all">
+        <div class="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-stone-700 dark:text-stone-300 text-lg font-mono">
+          🏛️
+        </div>
+        <h3 class="font-editorial text-2xl font-semibold text-stone-900 dark:text-stone-100">
+          The Contemplative Horizon
+        </h3>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Inquiring into the sanctuary of the mind. Epistemology, ethical healthcare governance, bioethics, and poetic reflections on identity, stillness, and classical Indian wisdom (*भीतर का ठिकाना*).
+        </p>
+        <ul class="text-xs font-mono space-y-2 text-stone-500 dark:text-stone-400 pt-2 border-t border-stone-100 dark:border-stone-800">
+          <li>✦ Foundation for Ethical AI in Healthcare</li>
+          <li>✦ Kshir-Neer Vivek & Epistemic Discernment</li>
+          <li>✦ Devanagari & English Verse (काव्य)</li>
+          <li>✦ Regulatory & Human Accountability</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Research Highlights -->
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <div class="flex items-end justify-between mb-10">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-widest text-gold-600 dark:text-gold-400 block mb-1">
+          Scholar's Archive
+        </span>
+        <h2 class="font-editorial text-3xl sm:text-4xl font-semibold text-stone-900 dark:text-stone-100">
+          Featured Publications
+        </h2>
+      </div>
+      <a
+        href="/research"
+        class="text-xs font-mono text-gold-600 dark:text-gold-400 hover:underline uppercase tracking-wider"
+      >
+        View All 15+ Papers &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6">
+      {featuredPublications.map((pub) => (
+        <PublicationCard pub={pub} />
+      ))}
+    </div>
+  </section>
+
+  <!-- Featured Writings & Musings (Visual Cards) -->
+  <section class="max-w-5xl mx-auto px-6 py-16">
+    <div class="flex items-end justify-between mb-10">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-widest text-gold-600 dark:text-gold-400 block mb-1">
+          The Codex
+        </span>
+        <h2 class="font-editorial text-3xl sm:text-4xl font-semibold text-stone-900 dark:text-stone-100">
+          Recent Writings & Poetry
+        </h2>
+      </div>
+      <a
+        href="/writing"
+        class="text-xs font-mono text-gold-600 dark:text-gold-400 hover:underline uppercase tracking-wider"
+      >
+        Enter The Codex &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {featuredWritings.map((post) => (
+        <a
+          href={`/writing/${post.slug}`}
+          class="group block rounded-2xl overflow-hidden border border-stone-200/90 dark:border-stone-800/90 bg-white/70 dark:bg-stone-900/60 backdrop-blur-sm hover:border-gold-500/70 transition-all shadow-sm hover:shadow-md"
+        >
+          {post.data.coverImage && (
+            <div class="h-44 overflow-hidden relative">
+              <img
+                src={post.data.coverImage}
+                alt={post.data.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-stone-950/80 text-stone-200 border border-stone-700 backdrop-blur-sm">
+                  {post.data.category === 'poetry' ? '✍️ Poetry' : post.data.category === 'philosophy' ? '🏛️ Philosophy' : '🔬 Science'}
+                </span>
+              </div>
+            </div>
+          )}
+          <div class="p-6 space-y-3">
+            <h3 class="font-editorial text-xl font-semibold text-stone-900 dark:text-stone-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors line-clamp-2">
+              {post.data.title}
+            </h3>
+            <p class="text-xs text-stone-600 dark:text-stone-400 line-clamp-2 leading-relaxed">
+              {post.data.description}
+            </p>
+            <div class="pt-2 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-[11px] font-mono text-stone-400">
+              <time datetime={post.data.date.toISOString()}>
+                {new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(post.data.date)}
+              </time>
+              <span>{post.data.readingTime || '4 min'}</span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Visual Moments Preview -->
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-widest text-gold-600 dark:text-gold-400 block mb-1">
+          Visual Diary
+        </span>
+        <h2 class="font-editorial text-3xl sm:text-4xl font-semibold text-stone-900 dark:text-stone-100">
+          Fragments & Moments
+        </h2>
+      </div>
+      <a
+        href="/moments"
+        class="text-xs font-mono text-gold-600 dark:text-gold-400 hover:underline uppercase tracking-wider"
+      >
+        View Full Gallery &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {previewMoments.map((m) => (
+        <div class="group relative rounded-xl overflow-hidden border border-stone-200 dark:border-stone-800 bg-stone-900 shadow-sm">
+          <img
+            src={m.imageUrl}
+            alt={m.title}
+            class="w-full h-56 object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/30 to-transparent p-4 flex flex-col justify-end text-white">
+            <span class="text-[10px] font-mono text-gold-400 uppercase tracking-wider">{m.location || m.category}</span>
+            <h4 class="font-editorial text-base font-medium">{m.title}</h4>
+            <p class="text-[11px] text-stone-300 line-clamp-1 mt-0.5">{m.caption}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

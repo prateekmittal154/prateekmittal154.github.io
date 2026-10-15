@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151A22"/>
+      <stop offset="50%" stop-color="#0B0E14"/>
+      <stop offset="100%" stop-color="#1F2937"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#D97706" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#D97706" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#grad)"/>
+  <circle cx="200" cy="180" r="140" fill="url(#glow)"/>
+  <circle cx="200" cy="150" r="55" fill="#2E3846" stroke="#D97706" stroke-width="2"/>
+  <path d="M110 320 C110 240, 290 240, 290 320 Z" fill="#232C37" stroke="#D97706" stroke-width="2"/>
+  <text x="200" y="370" font-family="Georgia, serif" font-size="18" font-style="italic" fill="#E6A760" text-anchor="middle" letter-spacing="2">PRATEEK MITTAL</text>
+</svg>
