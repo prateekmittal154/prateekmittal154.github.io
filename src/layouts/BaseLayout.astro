@@ -11,9 +11,9 @@ interface Props {
 }
 
 const {
-  title = 'Prateek Mittal — AI Decision Scientist & Medical AI Researcher',
-  description = 'Personal atelier, research archive, philosophy, and poetry of Prateek Mittal. Decision science at Accenture, medical AI at VEDAs Lab & Yale BrainLM, and ethical healthcare initiatives.',
-  image = '/images/avatar.jpg',
+  title = 'Prateek Mittal',
+  description = 'Personal website, essays, research, and reflections of Prateek Mittal.',
+  image = '/images/prateek.png',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -40,13 +40,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={image} />
-
     <!-- Prevent FOUC for dark mode -->
     <script is:inline>
       const theme = (() => {
@@ -66,14 +59,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       }
     </script>
   </head>
-  <body class="min-h-screen flex flex-col relative selection:bg-gold-500 selection:text-white">
-    <!-- Ambient Atmospheric Glows -->
-    <div class="ambient-glow"></div>
-    <div class="ambient-glow-left"></div>
-
+  <body class="min-h-screen flex flex-col antialiased">
     <Header />
 
-    <main class="flex-grow z-10 relative">
+    <main class="flex-grow">
       <slot />
     </main>
 

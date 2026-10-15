@@ -8,31 +8,11 @@ interface Props {
 const { pub } = Astro.props;
 ---
 
-<article class="group relative rounded-xl border border-stone-200/90 dark:border-stone-800/90 bg-white/70 dark:bg-stone-900/60 p-6 backdrop-blur-sm hover:border-gold-500/60 dark:hover:border-gold-500/60 transition-all shadow-sm hover:shadow-md">
-  <!-- Badges -->
-  {pub.badges && pub.badges.length > 0 && (
-    <div class="flex flex-wrap gap-2 mb-3">
-      {pub.badges.map((b) => {
-        const isHighlight = b.includes('Oral') || b.includes('Travel Grant') || b.includes('TMLR') || b.includes('MICCAI 2026');
-        return (
-          <span
-            class={`text-xs px-2.5 py-0.5 rounded-full font-mono tracking-tight ${
-              isHighlight
-                ? 'bg-amber-100 text-amber-900 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-300 dark:border-amber-700 font-semibold'
-                : 'bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300 border border-stone-200 dark:border-stone-700'
-            }`}
-          >
-            {b}
-          </span>
-        );
-      })}
-    </div>
-  )}
-
+<article class="space-y-2 border-b border-warm-100 dark:border-warm-800/60 pb-6">
   <!-- Title -->
-  <h3 class="font-editorial text-xl font-semibold text-stone-900 dark:text-stone-100 leading-snug group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
+  <h3 class="font-serif text-lg font-medium text-stone-900 dark:text-stone-100 leading-snug">
     {pub.url ? (
-      <a href={pub.url} target="_blank" rel="noopener noreferrer" class="hover:underline">
+      <a href={pub.url} target="_blank" rel="noopener noreferrer" class="hover:text-terracotta-500 hover:underline">
         {pub.title}
       </a>
     ) : (
@@ -41,12 +21,12 @@ const { pub } = Astro.props;
   </h3>
 
   <!-- Authors -->
-  <p class="text-sm text-stone-600 dark:text-stone-400 mt-2">
+  <p class="text-xs sm:text-sm text-stone-600 dark:text-stone-400 font-sans">
     {pub.authors.map((author, index) => {
       const isPrateek = author.includes('Prateek Mittal');
       return (
         <span>
-          <span class={isPrateek ? 'font-semibold text-stone-900 dark:text-stone-100 underline decoration-gold-500 underline-offset-2' : ''}>
+          <span class={isPrateek ? 'font-semibold text-stone-900 dark:text-stone-100' : ''}>
             {author}
           </span>
           {index < pub.authors.length - 1 && ', '}
@@ -55,60 +35,59 @@ const { pub } = Astro.props;
     })}
   </p>
 
-  <!-- Venue -->
-  <p class="text-xs text-stone-500 dark:text-stone-400 italic mt-1 font-editorial text-base">
+  <!-- Venue & Year -->
+  <p class="text-xs text-stone-500 dark:text-stone-400 italic font-serif">
     {pub.venue} ({pub.year})
   </p>
 
-  <!-- Abstract Excerpt if present -->
-  {pub.abstract && (
-    <p class="text-xs text-stone-600 dark:text-stone-400 mt-3 line-clamp-2 leading-relaxed font-sans">
-      {pub.abstract}
-    </p>
-  )}
+  <!-- Badges & Action Links -->
+  <div class="flex flex-wrap items-center gap-3 text-xs font-sans pt-1">
+    {pub.badges && pub.badges.map((b) => (
+      <span class="text-[11px] text-stone-600 dark:text-stone-300 bg-warm-100 dark:bg-warm-800/60 px-2 py-0.5 rounded">
+        {b}
+      </span>
+    ))}
 
-  <!-- Actions / Links -->
-  <div class="mt-4 pt-3 border-t border-stone-100 dark:border-stone-800/80 flex flex-wrap items-center gap-3 text-xs">
     {pub.url && (
       <a
         href={pub.url}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-1 text-gold-600 dark:text-gold-400 hover:underline font-medium"
+        class="text-terracotta-500 hover:underline font-medium"
       >
-        <span>View Paper</span>
-        <span>&rarr;</span>
+        Paper link &rarr;
       </a>
     )}
+
     {pub.doi && (
       <a
         href={`https://doi.org/${pub.doi}`}
         target="_blank"
         rel="noopener noreferrer"
-        class="text-stone-500 hover:text-stone-900 dark:hover:text-stone-200 font-mono"
+        class="text-stone-400 hover:text-stone-700 dark:hover:text-stone-200"
       >
-        DOI: {pub.doi}
+        DOI
       </a>
     )}
 
-    <!-- BibTeX Toggle Button -->
+    <!-- BibTeX Trigger -->
     <button
       type="button"
       data-bibtex-trigger={pub.id}
-      class="ml-auto text-stone-500 hover:text-gold-600 dark:hover:text-gold-400 font-mono text-[11px] px-2 py-0.5 rounded border border-stone-200 dark:border-stone-700 hover:border-gold-500"
+      class="text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 ml-auto"
     >
-      Cite (BibTeX)
+      BibTeX
     </button>
   </div>
 
   <!-- Expandable BibTeX Drawer -->
-  <div id={`bibtex-${pub.id}`} class="hidden mt-3 pt-3 border-t border-stone-200 dark:border-stone-800">
+  <div id={`bibtex-${pub.id}`} class="hidden mt-3 pt-3 border-t border-warm-200 dark:border-warm-800">
     <div class="relative">
-      <pre class="bg-stone-900 text-stone-200 p-3 rounded text-[11px] font-mono overflow-x-auto leading-relaxed">{pub.bibtex}</pre>
+      <pre class="bg-warm-100 dark:bg-warm-800/80 text-stone-800 dark:text-stone-200 p-3 rounded text-[11px] font-mono overflow-x-auto leading-relaxed">{pub.bibtex}</pre>
       <button
         type="button"
         data-copy-bibtex={pub.bibtex}
-        class="absolute top-2 right-2 px-2 py-1 bg-stone-800 hover:bg-gold-600 text-white rounded text-[10px] font-mono transition-colors"
+        class="absolute top-2 right-2 px-2 py-1 bg-warm-200 dark:bg-warm-700 hover:bg-stone-300 dark:hover:bg-stone-600 text-stone-800 dark:text-stone-200 rounded text-[10px] font-sans transition-colors"
       >
         Copy
       </button>
@@ -133,11 +112,9 @@ const { pub } = Astro.props;
       if (text) {
         await navigator.clipboard.writeText(text);
         const originalText = button.textContent;
-        button.textContent = 'Copied!';
-        button.classList.add('bg-green-700');
+        button.textContent = 'Copied';
         setTimeout(() => {
           button.textContent = originalText;
-          button.classList.remove('bg-green-700');
         }, 2000);
       }
     });

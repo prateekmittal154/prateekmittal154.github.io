@@ -3,197 +3,122 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('writing');
-const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const sortedPosts = allPosts.sort((a, b) => {
+  if (a.slug === 'pratigya-abhiyan') return -1;
+  if (b.slug === 'pratigya-abhiyan') return 1;
+  return b.data.date.valueOf() - a.data.date.valueOf();
+});
 
 const streams = [
-  { id: 'all', label: 'All Streams' },
-  { id: 'ai-research', label: '🔬 AI & Science' },
-  { id: 'philosophy', label: '🏛️ Philosophy & Ethics' },
-  { id: 'poetry', label: '✍️ Poetry & Verse (काव्य)' },
-  { id: 'memoirs', label: '🌿 Memoirs & Grassroots' },
+  { id: 'all', label: 'All' },
+  { id: 'memoirs', label: 'Memoirs & Pratigya' },
+  { id: 'poetry', label: 'Poetry (काव्य)' },
+  { id: 'philosophy', label: 'Philosophy' },
+  { id: 'ai-research', label: 'Research Notes' },
 ];
 ---
 
 <BaseLayout
-  title="The Writing Codex — Prateek Mittal"
-  description="Multi-stream writing across empirical machine learning, medical AI, philosophy, bioethics, and poetry."
+  title="Writing & Notes — Prateek Mittal"
+  description="Essays, poetry, memoirs, and technical notes by Prateek Mittal."
 >
-  <div class="max-w-5xl mx-auto px-6 py-16">
+  <div class="max-w-2xl mx-auto px-6 py-14 sm:py-20 space-y-10">
     <!-- Header -->
-    <div class="max-w-2xl mb-12">
-      <span class="text-xs font-mono uppercase tracking-widest text-gold-600 dark:text-gold-400 block mb-2">
-        The Polymath's Codex
-      </span>
-      <h1 class="font-editorial text-4xl sm:text-5xl font-semibold text-stone-900 dark:text-stone-50 tracking-tight mb-4">
-        Writing, Thought & Verse
+    <div class="space-y-3">
+      <h1 class="text-3xl sm:text-4xl font-serif font-medium text-warm-900 dark:text-warm-50 tracking-tight">
+        Writing & Poetry
       </h1>
-      <p class="text-base sm:text-lg text-stone-600 dark:text-stone-400 font-editorial italic leading-relaxed">
-        A multi-frequency journal of scientific inquiries, ethical frameworks, and poetic contemplations.
+      <p class="text-stone-600 dark:text-stone-400 font-sans text-sm leading-relaxed">
+        Essays, memoirs from Pratigya Abhiyan, Hindi & English verse, and notes on medical AI and philosophy.
       </p>
     </div>
 
-    <!-- Filter Bar & Search -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 pb-6 border-b border-stone-200 dark:border-stone-800">
-      <!-- Stream Buttons -->
-      <div class="flex flex-wrap gap-2" id="stream-filters">
-        {streams.map((stream) => (
-          <button
-            type="button"
-            data-stream={stream.id}
-            class={`text-xs font-mono px-3 py-1.5 rounded-full border transition-all ${
-              stream.id === 'all'
-                ? 'bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 border-stone-900 dark:border-stone-100 font-semibold'
-                : 'border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:border-gold-500 hover:text-gold-600 dark:hover:text-gold-400 bg-white/50 dark:bg-stone-900/40'
-            }`}
-          >
-            {stream.label}
-          </button>
-        ))}
-      </div>
-
-      <!-- Search Input -->
-      <div class="relative w-full md:w-64">
-        <input
-          type="text"
-          id="search-input"
-          placeholder="Search writing..."
-          class="w-full text-xs font-mono px-3 py-2 pl-8 rounded-lg border border-stone-200 dark:border-stone-800 bg-white/70 dark:bg-stone-900/60 text-stone-900 dark:text-stone-100 focus:outline-none focus:border-gold-500 placeholder:text-stone-400"
-        />
-        <svg class="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-      </div>
+    <!-- Category Filter Bar -->
+    <div class="flex flex-wrap gap-2 border-b border-warm-200 dark:border-warm-800 pb-4 text-xs font-sans" id="stream-filters">
+      {streams.map((stream) => (
+        <button
+          type="button"
+          data-stream={stream.id}
+          class={`px-3 py-1 rounded-full transition-colors ${
+            stream.id === 'all'
+              ? 'bg-warm-900 text-warm-50 dark:bg-warm-100 dark:text-warm-900 font-medium'
+              : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 bg-warm-100/60 dark:bg-warm-800/40'
+          }`}
+        >
+          {stream.label}
+        </button>
+      ))}
     </div>
 
-    <!-- Articles Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="posts-grid">
+    <!-- Articles List -->
+    <div class="space-y-8" id="posts-grid">
       {sortedPosts.map((post) => (
         <article
           data-category={post.data.category}
-          data-search={`${post.data.title.toLowerCase()} ${post.data.description.toLowerCase()} ${(post.data.tags || []).join(' ').toLowerCase()}`}
-          class="post-card group flex flex-col justify-between rounded-2xl overflow-hidden border border-stone-200/90 dark:border-stone-800/90 bg-white/80 dark:bg-stone-900/60 backdrop-blur-sm hover:border-gold-500/70 transition-all shadow-sm hover:shadow-md"
+          class="post-item space-y-1.5 group"
         >
-          {post.data.coverImage && (
-            <div class="h-48 overflow-hidden relative">
-              <img
-                src={post.data.coverImage}
-                alt={post.data.title}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-              <div class="absolute top-3 left-3">
-                <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-stone-950/80 text-stone-200 border border-stone-700 backdrop-blur-sm">
-                  {post.data.category === 'poetry' ? '✍️ Poetry' : post.data.category === 'philosophy' ? '🏛️ Philosophy' : post.data.category === 'memoirs' ? '🌿 Memoirs' : '🔬 Science'}
-                </span>
-              </div>
-            </div>
-          )}
-
-          <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
-            <div>
-              <div class="flex items-center gap-2 text-xs font-mono text-stone-400 mb-2">
-                <time datetime={post.data.date.toISOString()}>
-                  {new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(post.data.date)}
-                </time>
-                <span>·</span>
-                <span>{post.data.readingTime || '5 min read'}</span>
-              </div>
-
-              <h2 class="font-editorial text-2xl font-semibold text-stone-900 dark:text-stone-50 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors leading-snug">
-                <a href={`/writing/${post.slug}`}>
-                  {post.data.title}
-                </a>
-              </h2>
-
-              <p class="text-sm text-stone-600 dark:text-stone-400 font-sans mt-2.5 line-clamp-3 leading-relaxed">
-                {post.data.description}
-              </p>
-            </div>
-
-            <!-- Tags & Link -->
-            <div class="pt-4 border-t border-stone-100 dark:border-stone-800/80 flex items-center justify-between text-xs">
-              <div class="flex flex-wrap gap-1.5">
-                {(post.data.tags || []).slice(0, 3).map((tag) => (
-                  <span class="font-mono text-[10px] text-stone-500 dark:text-stone-400 bg-stone-100 dark:bg-stone-800 px-2 py-0.5 rounded">
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-
-              <a
-                href={`/writing/${post.slug}`}
-                class="font-mono text-gold-600 dark:text-gold-400 hover:underline flex items-center gap-1 font-medium"
-              >
-                <span>Read</span>
-                <span>&rarr;</span>
+          <div class="flex items-baseline justify-between gap-4">
+            <h2 class="text-xl font-serif font-medium text-stone-900 dark:text-stone-100 group-hover:text-terracotta-500 transition-colors">
+              <a href={`/writing/${post.slug}`}>
+                {post.data.title}
               </a>
-            </div>
+            </h2>
+            <time datetime={post.data.date.toISOString()} class="text-xs font-sans text-stone-400 flex-shrink-0">
+              {new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' }).format(post.data.date)}
+            </time>
+          </div>
+
+          <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed font-serif">
+            {post.data.description}
+          </p>
+
+          <div class="text-xs font-sans text-stone-400 pt-0.5">
+            <span class="text-terracotta-500 uppercase tracking-wider text-[11px] font-semibold">
+              {post.data.category === 'poetry' ? 'Poetry' : post.data.category === 'memoirs' ? 'Memoir' : post.data.category === 'philosophy' ? 'Philosophy' : 'Research'}
+            </span>
+            <span>·</span>
+            <span>{post.data.readingTime || '5 min read'}</span>
           </div>
         </article>
       ))}
     </div>
 
-    <!-- Empty State -->
-    <div id="no-results" class="hidden text-center py-20 text-stone-500 font-editorial text-lg italic">
-      No writings found matching your selection.
+    <div id="no-results" class="hidden text-center py-12 text-stone-400 font-serif italic text-sm">
+      No writings found in this category.
     </div>
   </div>
 </BaseLayout>
 
 <script is:inline>
   const filterButtons = document.querySelectorAll('#stream-filters button');
-  const postCards = document.querySelectorAll('.post-card');
-  const searchInput = document.getElementById('search-input');
+  const postItems = document.querySelectorAll('.post-item');
   const noResults = document.getElementById('no-results');
-
-  let activeStream = 'all';
-  let searchQuery = '';
-
-  function applyFilters() {
-    let visibleCount = 0;
-
-    postCards.forEach((card) => {
-      const category = card.getAttribute('data-category');
-      const searchText = card.getAttribute('data-search') || '';
-
-      const matchesStream = activeStream === 'all' || category === activeStream;
-      const matchesSearch = !searchQuery || searchText.includes(searchQuery);
-
-      if (matchesStream && matchesSearch) {
-        card.style.display = 'flex';
-        visibleCount++;
-      } else {
-        card.style.display = 'none';
-      }
-    });
-
-    if (noResults) {
-      if (visibleCount === 0) {
-        noResults.classList.remove('hidden');
-      } else {
-        noResults.classList.add('hidden');
-      }
-    }
-  }
 
   filterButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       filterButtons.forEach((b) => {
-        b.classList.remove('bg-stone-900', 'text-white', 'dark:bg-stone-100', 'dark:text-stone-900', 'font-semibold');
+        b.classList.remove('bg-warm-900', 'text-warm-50', 'dark:bg-warm-100', 'dark:text-warm-900', 'font-medium');
         b.classList.add('text-stone-600', 'dark:text-stone-400');
       });
-      btn.classList.add('bg-stone-900', 'text-white', 'dark:bg-stone-100', 'dark:text-stone-900', 'font-semibold');
+      btn.classList.add('bg-warm-900', 'text-warm-50', 'dark:bg-warm-100', 'dark:text-warm-900', 'font-medium');
       btn.classList.remove('text-stone-600', 'dark:text-stone-400');
 
-      activeStream = btn.getAttribute('data-stream') || 'all';
-      applyFilters();
+      const stream = btn.getAttribute('data-stream');
+      let count = 0;
+      postItems.forEach((item) => {
+        const cat = item.getAttribute('data-category');
+        if (stream === 'all' || cat === stream) {
+          item.style.display = 'block';
+          count++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      if (noResults) {
+        if (count === 0) noResults.classList.remove('hidden');
+        else noResults.classList.add('hidden');
+      }
     });
   });
-
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      searchQuery = e.target.value.toLowerCase().trim();
-      applyFilters();
-    });
-  }
 </script>

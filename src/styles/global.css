@@ -1,5 +1,5 @@
 @import 'katex/dist/katex.min.css';
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Noto+Serif+Devanagari:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Noto+Serif+Devanagari:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,111 +7,77 @@
 
 @layer base {
   :root {
-    --bg-primary: #FAF8F5;
-    --bg-secondary: #F3EFEA;
-    --bg-card: rgba(255, 255, 255, 0.9);
-    --border-color: rgba(215, 207, 194, 0.6);
-    --text-primary: #151618;
-    --text-secondary: #4F535B;
-    --text-muted: #8E929B;
-    --accent-gold: #9E6426;
-    --accent-gold-soft: #FDE8C7;
+    --bg-page: #FAF7F2;
+    --text-main: #1D1B18;
+    --text-muted: #6B665F;
+    --border-soft: #E8E2D8;
+    --accent-warm: #8C3B2D;
+    --accent-subtle: #F0EAE1;
   }
 
   .dark {
-    --bg-primary: #0C0E12;
-    --bg-secondary: #13161C;
-    --bg-card: rgba(18, 22, 29, 0.8);
-    --border-color: rgba(45, 53, 66, 0.6);
-    --text-primary: #F2F3F5;
-    --text-secondary: #9CA3AF;
-    --text-muted: #626A79;
-    --accent-gold: #D69344;
-    --accent-gold-soft: #59310A;
+    --bg-page: #161514;
+    --text-main: #EDE8E1;
+    --text-muted: #9E988F;
+    --border-soft: #2B2824;
+    --accent-warm: #D4715E;
+    --accent-subtle: #242220;
   }
 
   body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.75;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Lora', Georgia, serif;
+    color: var(--text-main);
+    letter-spacing: -0.015em;
   }
 
   ::selection {
-    background-color: var(--accent-gold);
-    color: #FFFFFF;
+    background-color: #EBD8CB;
+    color: #1D1B18;
+  }
+
+  .dark ::selection {
+    background-color: #4A2B24;
+    color: #EDE8E1;
   }
 }
 
-/* Atmospheric Subtle Vignette */
-.ambient-glow {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 650px;
-  height: 650px;
-  background: radial-gradient(circle at 70% 30%, rgba(214, 147, 68, 0.06) 0%, rgba(214, 147, 68, 0) 70%);
-  pointer-events: none;
-  filter: blur(80px);
-  z-index: 0;
+/* Human Typography Utilities */
+.font-sans-ui {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.ambient-glow-left {
-  position: absolute;
-  top: 600px;
-  left: -200px;
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle at 30% 70%, rgba(158, 100, 38, 0.04) 0%, rgba(158, 100, 38, 0) 75%);
-  pointer-events: none;
-  filter: blur(100px);
-  z-index: 0;
-}
-
-/* Editorial & Display Typography */
-.font-display {
-  font-family: 'Instrument Serif', 'Newsreader', Georgia, serif;
-}
-
-.font-editorial {
-  font-family: 'Cormorant Garamond', 'Newsreader', Georgia, serif;
+.font-serif-book {
+  font-family: 'Lora', Georgia, serif;
 }
 
 .font-devanagari {
-  font-family: 'Noto Serif Devanagari', 'Cormorant Garamond', serif;
+  font-family: 'Noto Serif Devanagari', 'Lora', serif;
 }
 
-/* Hairline Editorial Borders */
-.hairline-b {
-  border-bottom: 1px solid var(--border-color);
-}
-.hairline-t {
-  border-top: 1px solid var(--border-color);
-}
-.hairline-l {
-  border-left: 1px solid var(--border-color);
-}
-.hairline-r {
-  border-right: 1px solid var(--border-color);
-}
-
-/* Poetry Stanza Layout */
+/* Poetry Stanzas */
 .poetry-container {
-  font-family: 'Noto Serif Devanagari', 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
-  line-height: 2.2;
-  letter-spacing: 0.02em;
-  color: var(--text-primary);
-  max-width: 44ch;
-  margin: 3rem auto;
-  padding: 1.5rem 1rem;
+  font-family: 'Noto Serif Devanagari', 'Lora', serif;
+  font-size: 1.25rem;
+  line-height: 2.3;
+  color: var(--text-main);
+  max-width: 42ch;
+  margin: 3.5rem auto;
+  padding: 1rem;
 }
 
 .poetry-container p {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.2rem;
 }
 
 .poetry-container hr {
@@ -121,24 +87,24 @@
 }
 
 .poetry-container hr::before {
-  content: '✦   ✦   ✦';
-  letter-spacing: 0.8em;
-  font-size: 0.85rem;
-  color: var(--accent-gold);
+  content: '·  ·  ·';
+  letter-spacing: 1em;
+  font-size: 1rem;
+  color: var(--text-muted);
 }
 
-/* Minimalist Scrollbar */
+/* Simple, honest scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(140, 133, 123, 0.25);
+  background: rgba(140, 130, 120, 0.25);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-gold);
+  background: rgba(140, 130, 120, 0.45);
 }

@@ -3,8 +3,8 @@ import ThemeToggle from './ThemeToggle.astro';
 
 const navItems = [
   { label: 'Writing', href: '/writing' },
-  { label: 'Research', href: '/research' },
   { label: 'Journey', href: '/journey' },
+  { label: 'Research', href: '/research' },
   { label: 'Moments', href: '/moments' },
   { label: 'About', href: '/about' },
 ];
@@ -12,69 +12,61 @@ const navItems = [
 const pathname = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 backdrop-blur-md bg-parchment-50/80 dark:bg-ink-900/80 border-b border-stone-200/80 dark:border-stone-800/80 transition-colors">
-  <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-    <!-- Brand -->
-    <a href="/" class="group flex items-baseline gap-2.5">
-      <span class="font-display italic text-2xl sm:text-3xl font-medium tracking-tight text-stone-900 dark:text-stone-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
+<header class="border-b border-warm-200/80 dark:border-warm-800/80 transition-colors">
+  <div class="max-w-3xl mx-auto px-6 h-18 py-5 flex items-center justify-between">
+    <!-- Name / Home Link -->
+    <a href="/" class="group flex items-baseline gap-2">
+      <span class="font-serif text-xl sm:text-2xl font-medium tracking-tight text-warm-900 dark:text-warm-50 group-hover:text-terracotta-500 transition-colors">
         Prateek Mittal
-      </span>
-      <span class="hidden sm:inline-block text-[10px] uppercase tracking-[0.2em] text-stone-400 dark:text-stone-500 font-mono">
-        Atelier
       </span>
     </a>
 
-    <!-- Desktop Nav -->
-    <nav class="hidden md:flex items-center gap-7">
+    <!-- Desktop Navigation -->
+    <nav class="hidden sm:flex items-center gap-6 text-sm font-sans">
       {navItems.map((item) => {
         const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
         return (
           <a
             href={item.href}
-            class={`text-xs font-mono uppercase tracking-wider transition-all relative py-1 ${
+            class={`transition-colors py-1 ${
               isActive
-                ? 'text-stone-950 dark:text-stone-50 font-semibold'
-                : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
+                ? 'text-terracotta-500 font-semibold underline decoration-terracotta-500 decoration-2 underline-offset-8'
+                : 'text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-stone-100'
             }`}
           >
             {item.label}
-            {isActive && (
-              <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-gold-500 rounded-full" />
-            )}
           </a>
         );
       })}
 
-      <!-- Separator -->
-      <div class="w-px h-4 bg-stone-300 dark:bg-stone-700" />
+      <div class="w-px h-3.5 bg-warm-200 dark:bg-warm-700 mx-1" />
 
-      <!-- Theme Switcher -->
       <ThemeToggle />
     </nav>
 
-    <!-- Mobile Nav Button -->
-    <div class="flex items-center gap-2 md:hidden">
+    <!-- Mobile Nav Toggle -->
+    <div class="flex items-center gap-3 sm:hidden">
       <ThemeToggle />
       <button
         id="mobile-menu-button"
         type="button"
-        class="p-2 text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white"
-        aria-label="Toggle navigation menu"
+        class="p-1.5 text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white"
+        aria-label="Toggle menu"
       >
-        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16m-7 6h7" />
         </svg>
       </button>
     </div>
   </div>
 
   <!-- Mobile Dropdown -->
-  <div id="mobile-menu" class="hidden md:hidden border-b border-stone-200 dark:border-stone-800 bg-parchment-100 dark:bg-ink-850 px-6 py-4">
-    <div class="flex flex-col gap-3">
+  <div id="mobile-menu" class="hidden sm:hidden border-t border-warm-200 dark:border-warm-800 bg-warm-100/60 dark:bg-warm-900/60 px-6 py-4">
+    <div class="flex flex-col gap-3 font-sans text-sm">
       {navItems.map((item) => (
         <a
           href={item.href}
-          class="text-base py-1.5 text-stone-700 dark:text-stone-300 hover:text-gold-600 dark:hover:text-gold-400 font-medium"
+          class="py-1 text-stone-700 dark:text-stone-300 hover:text-terracotta-500"
         >
           {item.label}
         </a>
