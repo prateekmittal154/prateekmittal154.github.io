@@ -5,10 +5,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Newsreader', 'Cormorant Garamond', 'Georgia', 'serif'],
+        display: ['Instrument Serif', 'Newsreader', 'Georgia', 'serif'],
+        serif: ['Cormorant Garamond', 'Newsreader', 'Georgia', 'serif'],
+        cormorant: ['Cormorant Garamond', 'serif'],
         sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Menlo', 'monospace'],
-        devanagari: ['Noto Serif Devanagari', 'Rozha One', 'serif'],
+        devanagari: ['Noto Serif Devanagari', 'Cormorant Garamond', 'serif'],
       },
       colors: {
         parchment: {

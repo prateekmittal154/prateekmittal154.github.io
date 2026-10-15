@@ -15,12 +15,12 @@ const pathname = Astro.url.pathname;
 <header class="sticky top-0 z-50 backdrop-blur-md bg-parchment-50/80 dark:bg-ink-900/80 border-b border-stone-200/80 dark:border-stone-800/80 transition-colors">
   <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
     <!-- Brand -->
-    <a href="/" class="group flex items-baseline gap-2">
-      <span class="font-editorial text-2xl font-semibold tracking-tight text-stone-900 dark:text-stone-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
+    <a href="/" class="group flex items-baseline gap-2.5">
+      <span class="font-display italic text-2xl sm:text-3xl font-medium tracking-tight text-stone-900 dark:text-stone-100 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
         Prateek Mittal
       </span>
-      <span class="hidden sm:inline-block text-xs uppercase tracking-widest text-stone-400 dark:text-stone-500 font-mono">
-        Atelier & Research
+      <span class="hidden sm:inline-block text-[10px] uppercase tracking-[0.2em] text-stone-400 dark:text-stone-500 font-mono">
+        Atelier
       </span>
     </a>
 
@@ -31,10 +31,10 @@ const pathname = Astro.url.pathname;
         return (
           <a
             href={item.href}
-            class={`text-sm font-medium transition-all relative py-1 ${
+            class={`text-xs font-mono uppercase tracking-wider transition-all relative py-1 ${
               isActive
-                ? 'text-gold-600 dark:text-gold-400 font-semibold'
-                : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
+                ? 'text-stone-950 dark:text-stone-50 font-semibold'
+                : 'text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100'
             }`}
           >
             {item.label}

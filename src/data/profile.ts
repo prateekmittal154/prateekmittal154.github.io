@@ -18,7 +18,7 @@ export const profile = {
   location: 'Gurugram & Faridabad, India',
   email: 'prateekmittal154@gmail.com',
   phone: '+91-9205119313',
-  avatar: '/images/avatar.svg', // Drop your personal photo in public/images/avatar.jpg and change to /images/avatar.jpg anytime
+  avatar: '/images/prateek.png',
   social: [
     { name: 'GitHub', url: 'https://github.com/prateekmittal154', icon: 'github' },
     { name: 'LinkedIn', url: 'https://linkedin.com/in/prateek-mittal', icon: 'linkedin' },
