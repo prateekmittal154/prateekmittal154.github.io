@@ -11,8 +11,13 @@ const featuredPublications = publications.filter((p) =>
 );
 
 const allWritings = await getCollection('writing');
+// Sort by date, but make sure Pratigya Abhiyan and poetry are featured at the top!
 const featuredWritings = allWritings
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .sort((a, b) => {
+    if (a.slug === 'pratigya-abhiyan') return -1;
+    if (b.slug === 'pratigya-abhiyan') return 1;
+    return b.data.date.valueOf() - a.data.date.valueOf();
+  })
   .slice(0, 3);
 
 const previewMoments = moments.slice(0, 3);
@@ -24,9 +29,9 @@ const previewMoments = moments.slice(0, 3);
     <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
       <!-- Text Column -->
       <div class="md:col-span-8 space-y-6">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-stone-100 dark:bg-stone-800/80 border border-stone-200 dark:border-stone-700 text-stone-700 dark:text-stone-300">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>Accenture AI Decision Science & Medical AI Researcher</span>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono bg-stone-100 dark:bg-stone-800/80 border border-stone-200 dark:border-stone-700 text-stone-700 dark:text-stone-300">
+          <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+          <span>Thinker · Writer · Researcher · Former Academic Head @ Pratigya Abhiyan</span>
         </div>
 
         <h1 class="font-editorial text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-stone-900 dark:text-stone-50 leading-[1.08]">
@@ -34,11 +39,11 @@ const previewMoments = moments.slice(0, 3);
         </h1>
 
         <p class="font-editorial italic text-2xl sm:text-3xl text-stone-700 dark:text-stone-300 leading-snug">
-          Where empirical intelligence meets the quietude of human consciousness.
+          At the quiet intersections of empirical science, grassroots action, philosophy, and verse.
         </p>
 
         <p class="text-base sm:text-lg text-stone-600 dark:text-stone-400 font-sans leading-relaxed max-w-2xl">
-          Decision science analyst at Accenture, medical-AI researcher across MICCAI, TMLR, and ICLR (BrainLM), and founder of the Foundation for Ethical AI in Healthcare. In quieter moments, a wayfarer of philosophy and poet of inner dwellings.
+          Exploring how mathematical rigor and human compassion inform one another. From teaching children on grassroots classroom floors with Pratigya Abhiyan, to medical AI research at MICCAI and Yale BrainLM, decision science at Accenture, and contemplative Hindi and English poetry in quieter hours.
         </p>
 
         <!-- CTA Buttons -->
@@ -50,10 +55,16 @@ const previewMoments = moments.slice(0, 3);
             The Writing Codex &rarr;
           </a>
           <a
-            href="/research"
+            href="/journey"
             class="px-5 py-2.5 rounded-lg border border-stone-300 dark:border-stone-700 hover:border-gold-500 dark:hover:border-gold-500 text-stone-800 dark:text-stone-200 text-sm font-medium transition-all"
           >
-            Research & Papers
+            The Odyssey (Chapters)
+          </a>
+          <a
+            href="/research"
+            class="px-5 py-2.5 rounded-lg border border-stone-200 dark:border-stone-800 hover:border-stone-400 text-stone-600 dark:text-stone-400 text-sm font-medium transition-all"
+          >
+            Research Papers
           </a>
           <a
             href="/moments"
@@ -65,7 +76,7 @@ const previewMoments = moments.slice(0, 3);
 
         <!-- Social Badges -->
         <div class="flex flex-wrap items-center gap-4 pt-2 text-xs font-mono text-stone-500 dark:text-stone-400">
-          <span>Connect:</span>
+          <span>Direct Channels:</span>
           {profile.social.map((s) => (
             <a
               href={s.url}
@@ -104,27 +115,68 @@ const previewMoments = moments.slice(0, 3);
     <div class="max-w-5xl mx-auto px-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         <div class="space-y-1">
-          <span class="text-2xl font-editorial font-bold text-gold-600 dark:text-gold-400">MICCAI '26</span>
+          <span class="text-xl sm:text-2xl font-editorial font-bold text-gold-600 dark:text-gold-400">Pratigya Abhiyan</span>
+          <p class="text-xs font-mono text-stone-600 dark:text-stone-400">Volunteer &rarr; Academic Head</p>
+        </div>
+        <div class="space-y-1">
+          <span class="text-xl sm:text-2xl font-editorial font-bold text-stone-900 dark:text-stone-100">MICCAI '26</span>
           <p class="text-xs font-mono text-stone-600 dark:text-stone-400">Travel Grant & 3 Orals</p>
         </div>
         <div class="space-y-1">
-          <span class="text-2xl font-editorial font-bold text-stone-900 dark:text-stone-100">TMLR</span>
-          <p class="text-xs font-mono text-stone-600 dark:text-stone-400">High-Dim Subsampling</p>
+          <span class="text-xl sm:text-2xl font-editorial font-bold text-stone-900 dark:text-stone-100">TMLR & Yale</span>
+          <p class="text-xs font-mono text-stone-600 dark:text-stone-400">BrainLM (ICLR) & Robust ML</p>
         </div>
         <div class="space-y-1">
-          <span class="text-2xl font-editorial font-bold text-stone-900 dark:text-stone-100">BrainLM</span>
-          <p class="text-xs font-mono text-stone-600 dark:text-stone-400">ICLR 2024 (Yale)</p>
+          <span class="text-xl sm:text-2xl font-editorial font-bold text-gold-600 dark:text-gold-400">काव्य & विचार</span>
+          <p class="text-xs font-mono text-stone-600 dark:text-stone-400">Poetry & Moral Inquiry</p>
         </div>
-        <div class="space-y-1">
-          <span class="text-2xl font-editorial font-bold text-gold-600 dark:text-gold-400">BITS Pilani</span>
-          <p class="text-xs font-mono text-stone-600 dark:text-stone-400">M.Sc. Data Science (9.50)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spotlight Feature: Pratigya Abhiyan -->
+  <section class="max-w-5xl mx-auto px-6 py-16">
+    <div class="p-8 sm:p-10 rounded-3xl border border-amber-200/80 dark:border-amber-900/40 bg-gradient-to-br from-amber-50/60 via-parchment-50/80 to-amber-100/30 dark:from-stone-900/80 dark:via-ink-900/60 dark:to-amber-950/20 backdrop-blur-md">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div class="md:col-span-8 space-y-4">
+          <span class="text-xs font-mono uppercase tracking-widest text-gold-600 dark:text-gold-400 font-semibold block">
+            Featured Memoir & Documentation
+          </span>
+          <h2 class="font-editorial text-3xl sm:text-4xl font-semibold text-stone-900 dark:text-stone-100 leading-tight">
+            Pratigya Abhiyan: Lessons from the Grassroots
+          </h2>
+          <p class="font-editorial italic text-lg text-stone-700 dark:text-stone-300">
+            "Before I ever trained a neural network or decoded an fMRI scan, my most profound education took place on concrete floors with children whose eyes sparkled with unbroken curiosity."
+          </p>
+          <p class="text-sm text-stone-600 dark:text-stone-400 font-sans leading-relaxed">
+            A comprehensive retrospective on four years of grassroots education at Thapar Institute—teaching students from underserved backgrounds, redesigning pedagogical curricula, and mentoring volunteer cohorts.
+          </p>
+          <div class="pt-2">
+            <a
+              href="/writing/pratigya-abhiyan"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 hover:bg-gold-600 dark:hover:bg-gold-400 text-xs font-mono font-semibold transition-all shadow-sm"
+            >
+              <span>Read the Full Memoir & Documentation</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+        </div>
+        <div class="md:col-span-4">
+          <div class="rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-800 shadow-md">
+            <img
+              src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80"
+              alt="Pratigya Abhiyan Grassroots Education"
+              class="w-full h-56 object-cover"
+              loading="lazy"
+            />
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- The Two Hemispheres: The Polymath's Duality -->
-  <section class="max-w-5xl mx-auto px-6 py-20">
+  <section class="max-w-5xl mx-auto px-6 py-12">
     <div class="text-center max-w-xl mx-auto mb-14">
       <span class="text-xs font-mono uppercase tracking-widest text-gold-600 dark:text-gold-400 block mb-2">
         The Dual Architecture
@@ -138,73 +190,47 @@ const previewMoments = moments.slice(0, 3);
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- Empirical Horizon -->
-      <div class="p-8 rounded-2xl border border-stone-200 dark:border-stone-800 bg-white/60 dark:bg-stone-900/40 backdrop-blur-sm space-y-4 hover:border-gold-500/50 transition-all">
-        <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-950/60 flex items-center justify-center text-amber-700 dark:text-amber-400 text-lg font-mono">
-          🔬
-        </div>
-        <h3 class="font-editorial text-2xl font-semibold text-stone-900 dark:text-stone-100">
-          The Empirical Horizon
-        </h3>
-        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-          Grounding intelligence in mathematical truth. From Laplace–Beltrami spectral analysis of 3D brain lesions to high-dimensional subsampling algorithms and foundation neuroimaging models (BrainLM).
-        </p>
-        <ul class="text-xs font-mono space-y-2 text-stone-500 dark:text-stone-400 pt-2 border-t border-stone-100 dark:border-stone-800">
-          <li>✦ Differential Geometry & Topology</li>
-          <li>✦ Clinical Graph-RAG (SNOMED-CT)</li>
-          <li>✦ Robust High-Dimensional Estimation</li>
-          <li>✦ Production GenAI & Decision Science</li>
-        </ul>
-      </div>
-
-      <!-- Contemplative Horizon -->
+      <!-- Grassroots & Human Spirit -->
       <div class="p-8 rounded-2xl border border-stone-200 dark:border-stone-800 bg-white/60 dark:bg-stone-900/40 backdrop-blur-sm space-y-4 hover:border-gold-500/50 transition-all">
         <div class="w-10 h-10 rounded-lg bg-stone-100 dark:bg-stone-800 flex items-center justify-center text-stone-700 dark:text-stone-300 text-lg font-mono">
           🏛️
         </div>
         <h3 class="font-editorial text-2xl font-semibold text-stone-900 dark:text-stone-100">
-          The Contemplative Horizon
+          The Human Spirit & Contemplation
         </h3>
         <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-          Inquiring into the sanctuary of the mind. Epistemology, ethical healthcare governance, bioethics, and poetic reflections on identity, stillness, and classical Indian wisdom (*भीतर का ठिकाना*).
+          Grounding intellect in human reality. From four years of grassroots teaching at Pratigya Abhiyan, to founding the Foundation for Ethical AI in Healthcare, bioethics, epistemological discernment (*क्षीर-नीर विवेक*), and quiet poetry (*भीतर का ठिकाना*).
         </p>
         <ul class="text-xs font-mono space-y-2 text-stone-500 dark:text-stone-400 pt-2 border-t border-stone-100 dark:border-stone-800">
+          <li>✦ Pratigya Abhiyan (Volunteer to Academic Head)</li>
           <li>✦ Foundation for Ethical AI in Healthcare</li>
           <li>✦ Kshir-Neer Vivek & Epistemic Discernment</li>
           <li>✦ Devanagari & English Verse (काव्य)</li>
-          <li>✦ Regulatory & Human Accountability</li>
+        </ul>
+      </div>
+
+      <!-- Empirical Craft & Science -->
+      <div class="p-8 rounded-2xl border border-stone-200 dark:border-stone-800 bg-white/60 dark:bg-stone-900/40 backdrop-blur-sm space-y-4 hover:border-gold-500/50 transition-all">
+        <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-950/60 flex items-center justify-center text-amber-700 dark:text-amber-400 text-lg font-mono">
+          🔬
+        </div>
+        <h3 class="font-editorial text-2xl font-semibold text-stone-900 dark:text-stone-100">
+          Empirical Craft & Science
+        </h3>
+        <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+          Seeking mathematical harmony. Investigating differential geometric representations of lesions (Shape-DNA), high-dimensional subsampling theory, whole-brain foundation models (BrainLM at Yale), and decision systems at Accenture.
+        </p>
+        <ul class="text-xs font-mono space-y-2 text-stone-500 dark:text-stone-400 pt-2 border-t border-stone-100 dark:border-stone-800">
+          <li>✦ Differential Geometry & Laplace-Beltrami Spectra</li>
+          <li>✦ Robust High-Dimensional Estimation (TMLR)</li>
+          <li>✦ BrainLM Foundation Neuroimaging (ICLR 2024)</li>
+          <li>✦ Decision Science & Clinical Systems at Scale</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- Featured Research Highlights -->
-  <section class="max-w-5xl mx-auto px-6 py-12">
-    <div class="flex items-end justify-between mb-10">
-      <div>
-        <span class="text-xs font-mono uppercase tracking-widest text-gold-600 dark:text-gold-400 block mb-1">
-          Scholar's Archive
-        </span>
-        <h2 class="font-editorial text-3xl sm:text-4xl font-semibold text-stone-900 dark:text-stone-100">
-          Featured Publications
-        </h2>
-      </div>
-      <a
-        href="/research"
-        class="text-xs font-mono text-gold-600 dark:text-gold-400 hover:underline uppercase tracking-wider"
-      >
-        View All 15+ Papers &rarr;
-      </a>
-    </div>
-
-    <div class="grid grid-cols-1 gap-6">
-      {featuredPublications.map((pub) => (
-        <PublicationCard pub={pub} />
-      ))}
-    </div>
-  </section>
-
-  <!-- Featured Writings & Musings (Visual Cards) -->
+  <!-- Featured Writings, Memoirs & Poetry -->
   <section class="max-w-5xl mx-auto px-6 py-16">
     <div class="flex items-end justify-between mb-10">
       <div>
@@ -212,7 +238,7 @@ const previewMoments = moments.slice(0, 3);
           The Codex
         </span>
         <h2 class="font-editorial text-3xl sm:text-4xl font-semibold text-stone-900 dark:text-stone-100">
-          Recent Writings & Poetry
+          Featured Writings, Memoirs & Poetry
         </h2>
       </div>
       <a
@@ -239,7 +265,7 @@ const previewMoments = moments.slice(0, 3);
               />
               <div class="absolute top-3 left-3">
                 <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-stone-950/80 text-stone-200 border border-stone-700 backdrop-blur-sm">
-                  {post.data.category === 'poetry' ? '✍️ Poetry' : post.data.category === 'philosophy' ? '🏛️ Philosophy' : '🔬 Science'}
+                  {post.data.category === 'poetry' ? '✍️ Poetry' : post.data.category === 'philosophy' ? '🏛️ Philosophy' : post.data.category === 'memoirs' ? '🌿 Memoir' : '🔬 Science'}
                 </span>
               </div>
             </div>
@@ -259,6 +285,32 @@ const previewMoments = moments.slice(0, 3);
             </div>
           </div>
         </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Featured Research Highlights -->
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <div class="flex items-end justify-between mb-10">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-widest text-gold-600 dark:text-gold-400 block mb-1">
+          Scholar's Archive
+        </span>
+        <h2 class="font-editorial text-3xl sm:text-4xl font-semibold text-stone-900 dark:text-stone-100">
+          Selected Research & Papers
+        </h2>
+      </div>
+      <a
+        href="/research"
+        class="text-xs font-mono text-gold-600 dark:text-gold-400 hover:underline uppercase tracking-wider"
+      >
+        View All 15+ Papers &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6">
+      {featuredPublications.map((pub) => (
+        <PublicationCard pub={pub} />
       ))}
     </div>
   </section>

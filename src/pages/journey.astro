@@ -1,90 +1,129 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { experiences, education } from '../data/experience';
+import { chapters, education } from '../data/experience';
 import { profile } from '../data/profile';
 ---
 
 <BaseLayout
-  title="Journey & Leadership — Prateek Mittal"
-  description="Career timeline, academic milestones, research labs, leadership initiatives, and professional service of Prateek Mittal."
+  title="The Odyssey & Chapters — Prateek Mittal"
+  description="An editorial chronicle of Prateek Mittal's journey: from grassroots education at Pratigya Abhiyan to Yale BrainLM, MICCAI research, enterprise decision science, and ethical AI initiatives."
 >
   <div class="max-w-4xl mx-auto px-6 py-16">
-    <!-- Header -->
-    <div class="mb-14">
+    <!-- Editorial Header -->
+    <div class="max-w-2xl mb-16">
       <span class="text-xs font-mono uppercase tracking-widest text-gold-600 dark:text-gold-400 block mb-2">
-        Curriculum Vitae
+        The Chronicles
       </span>
-      <h1 class="font-editorial text-4xl sm:text-5xl font-semibold text-stone-900 dark:text-stone-50 tracking-tight mb-4">
-        The Journey & Leadership
+      <h1 class="font-editorial text-4xl sm:text-5xl md:text-6xl font-semibold text-stone-900 dark:text-stone-50 tracking-tight mb-4">
+        Chapters of the Journey
       </h1>
-      <p class="text-base sm:text-lg text-stone-600 dark:text-stone-400 font-editorial italic leading-relaxed">
-        Tracing the convergence of production enterprise systems, academic research labs, and ethical initiatives.
+      <p class="text-lg sm:text-xl text-stone-600 dark:text-stone-400 font-editorial italic leading-relaxed">
+        Not a mechanical sequence of job titles, but four formative chapters of learning, social action, empirical research, and moral responsibility.
       </p>
     </div>
 
-    <!-- Experience Timeline -->
-    <section class="mb-20">
-      <h2 class="font-editorial text-2xl sm:text-3xl font-semibold text-stone-900 dark:text-stone-100 mb-8 flex items-center gap-3">
-        <span>Experience & Research Positions</span>
-        <span class="h-px flex-grow bg-stone-200 dark:bg-stone-800"></span>
-      </h2>
-
-      <div class="relative pl-6 sm:pl-8 border-l border-stone-200 dark:border-stone-800 space-y-12">
-        {experiences.map((item) => (
-          <div class="relative group">
-            <!-- Timeline dot -->
-            <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-stone-50 dark:border-stone-900 bg-gold-500 group-hover:scale-125 transition-transform" />
-
-            <div class="space-y-2">
-              <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                <h3 class="font-editorial text-2xl font-semibold text-stone-900 dark:text-stone-100">
-                  {item.role}
-                </h3>
-                <span class="text-xs font-mono text-stone-500 dark:text-stone-400">
-                  {item.period}
-                </span>
-              </div>
-
-              <div class="flex flex-wrap items-center gap-2 text-sm text-gold-600 dark:text-gold-400 font-medium">
-                <span>{item.organization}</span>
-                <span>·</span>
-                <span class="text-stone-500 font-normal">{item.location}</span>
-              </div>
-
-              <ul class="mt-3 space-y-2 text-sm text-stone-600 dark:text-stone-400 list-disc list-outside pl-4 leading-relaxed">
-                {item.description.map((bullet) => (
-                  <li>{bullet}</li>
-                ))}
-              </ul>
-
-              {item.skills && (
-                <div class="flex flex-wrap gap-1.5 pt-2">
-                  {item.skills.map((skill) => (
-                    <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-stone-100 dark:bg-stone-800/80 text-stone-600 dark:text-stone-300">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              )}
+    <!-- Chapter List (Editorial Anthology) -->
+    <div class="space-y-20">
+      {chapters.map((chap) => (
+        <article class="relative group p-8 sm:p-10 rounded-3xl border border-stone-200/90 dark:border-stone-800/90 bg-white/75 dark:bg-stone-900/60 backdrop-blur-md shadow-sm hover:shadow-lg hover:border-gold-500/50 transition-all">
+          <!-- Chapter Number Watermark & Header -->
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
+            <div class="space-y-1">
+              <span class="text-xs font-mono tracking-widest uppercase text-gold-600 dark:text-gold-400 font-semibold block">
+                Chapter {chap.number} · {chap.period}
+              </span>
+              <h2 class="font-editorial text-2xl sm:text-3xl md:text-4xl font-semibold text-stone-900 dark:text-stone-100">
+                {chap.title}
+              </h2>
+              <p class="text-sm font-sans text-stone-500 dark:text-stone-400 font-medium">
+                {chap.subtitle}
+              </p>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
 
-    <!-- Education -->
-    <section class="mb-20">
-      <h2 class="font-editorial text-2xl sm:text-3xl font-semibold text-stone-900 dark:text-stone-100 mb-8 flex items-center gap-3">
-        <span>Education</span>
-        <span class="h-px flex-grow bg-stone-200 dark:bg-stone-800"></span>
-      </h2>
+            <!-- Sculptural Roman/Serif Numeral Watermark -->
+            <span class="font-editorial italic text-6xl sm:text-7xl font-bold text-stone-200 dark:text-stone-800/60 select-none flex-shrink-0">
+              {chap.number}
+            </span>
+          </div>
+
+          <!-- The Essence / Quote Box -->
+          <div class="my-6 p-4 sm:p-5 rounded-2xl bg-amber-50/60 dark:bg-amber-950/20 border-l-3 border-gold-500 text-stone-700 dark:text-stone-300 font-editorial italic text-base sm:text-lg leading-relaxed">
+            "{chap.essence}"
+          </div>
+
+          <!-- Narrative Overview -->
+          <p class="text-sm sm:text-base text-stone-600 dark:text-stone-300 leading-relaxed font-sans mb-8">
+            {chap.narrative}
+          </p>
+
+          <!-- Highlight Link if present (e.g. Pratigya Abhiyan Memoir) -->
+          {chap.highlightLink && (
+            <div class="mb-8">
+              <a
+                href={chap.highlightLink.url}
+                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gold-500/10 hover:bg-gold-500/20 text-gold-700 dark:text-gold-300 border border-gold-500/30 text-xs font-mono transition-all font-semibold"
+              >
+                <span>✦</span>
+                <span>{chap.highlightLink.text}</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          )}
+
+          <!-- Detailed Items in this Chapter -->
+          <div class="space-y-6 pt-6 border-t border-stone-100 dark:border-stone-800">
+            {chap.items.map((item) => (
+              <div class="p-5 rounded-2xl bg-stone-50/70 dark:bg-stone-950/40 border border-stone-200/60 dark:border-stone-800/60 space-y-3">
+                <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                  <h3 class="font-editorial text-xl font-semibold text-stone-900 dark:text-stone-100">
+                    {item.role}
+                  </h3>
+                  <span class="text-xs font-mono text-stone-500 dark:text-stone-400">
+                    {item.period}
+                  </span>
+                </div>
+
+                <div class="text-xs font-mono text-gold-600 dark:text-gold-400">
+                  {item.organization} · {item.location}
+                </div>
+
+                <ul class="space-y-1.5 text-xs sm:text-sm text-stone-600 dark:text-stone-300 list-disc list-outside pl-4 leading-relaxed font-sans">
+                  {item.description.map((d) => (
+                    <li>{d}</li>
+                  ))}
+                </ul>
+
+                {item.skills && (
+                  <div class="flex flex-wrap gap-1.5 pt-2">
+                    {item.skills.map((s) => (
+                      <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-stone-200/70 dark:bg-stone-800 text-stone-700 dark:text-stone-300">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Education Section -->
+    <section class="mt-24 mb-16">
+      <div class="flex items-center gap-4 mb-8">
+        <h2 class="font-editorial text-3xl font-semibold text-stone-900 dark:text-stone-100">
+          Academic Foundations
+        </h2>
+        <span class="h-px flex-grow bg-stone-200 dark:border-stone-800"></span>
+      </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {education.map((edu) => (
-          <div class="p-6 rounded-2xl border border-stone-200 dark:border-stone-800 bg-white/70 dark:bg-stone-900/60 backdrop-blur-sm space-y-2">
+          <div class="p-6 rounded-2xl border border-stone-200 dark:border-stone-800 bg-white/70 dark:bg-stone-900/60 space-y-2">
             <span class="text-xs font-mono text-gold-600 dark:text-gold-400">{edu.timeline}</span>
             <h3 class="font-editorial text-xl font-semibold text-stone-900 dark:text-stone-100">{edu.degree}</h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 font-medium">{edu.institution}</p>
+            <p class="text-sm text-stone-600 dark:text-stone-400">{edu.institution}</p>
             <p class="text-xs font-mono font-semibold text-stone-800 dark:text-stone-200 pt-1">{edu.score}</p>
             {edu.details && <p class="text-xs text-stone-500 pt-1">{edu.details}</p>}
           </div>
@@ -92,29 +131,29 @@ import { profile } from '../data/profile';
       </div>
     </section>
 
-    <!-- Distinctions & Reviewing Service -->
-    <section>
-      <h2 class="font-editorial text-2xl sm:text-3xl font-semibold text-stone-900 dark:text-stone-100 mb-8 flex items-center gap-3">
-        <span>Distinctions & Peer Review</span>
-        <span class="h-px flex-grow bg-stone-200 dark:bg-stone-800"></span>
-      </h2>
-
-      <div class="space-y-6">
-        <div class="p-6 rounded-2xl border border-stone-200 dark:border-stone-800 bg-white/70 dark:bg-stone-900/60 space-y-4">
-          <h3 class="text-sm font-mono uppercase tracking-wider text-gold-600 dark:text-gold-400">Awards & Honors</h3>
-          <ul class="space-y-3 text-sm text-stone-700 dark:text-stone-300">
-            {profile.awards.map((award) => (
-              <li class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
-                <span class="font-semibold text-stone-900 dark:text-stone-100">{award.title} ({award.year}):</span>
-                <span class="text-stone-600 dark:text-stone-400">{award.description}</span>
+    <!-- Distinctions Honor Roll -->
+    <section class="p-8 rounded-3xl bg-parchment-100/70 dark:bg-ink-850/60 border border-stone-200 dark:border-stone-800">
+      <h3 class="font-editorial text-2xl font-semibold text-stone-900 dark:text-stone-100 mb-6">
+        Honors & Scholarly Service
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+        <div class="space-y-3">
+          <span class="text-xs font-mono uppercase tracking-wider text-gold-600 dark:text-gold-400 font-semibold block">
+            Selected Distinctions
+          </span>
+          <ul class="space-y-2.5 text-stone-700 dark:text-stone-300">
+            {profile.awards.map((a) => (
+              <li>
+                <strong class="text-stone-900 dark:text-stone-100">{a.title} ({a.year})</strong>: {a.description}
               </li>
             ))}
           </ul>
         </div>
-
-        <div class="p-6 rounded-2xl border border-stone-200 dark:border-stone-800 bg-white/70 dark:bg-stone-900/60 space-y-3">
-          <h3 class="text-sm font-mono uppercase tracking-wider text-gold-600 dark:text-gold-400">Scholarly Reviewing Service</h3>
-          <ul class="space-y-2 text-sm text-stone-600 dark:text-stone-400 font-sans">
+        <div class="space-y-3">
+          <span class="text-xs font-mono uppercase tracking-wider text-gold-600 dark:text-gold-400 font-semibold block">
+            Peer Reviewing
+          </span>
+          <ul class="space-y-2 text-stone-600 dark:text-stone-400">
             {profile.service.map((s) => (
               <li class="flex items-center gap-2">
                 <span class="text-gold-500">✦</span>
