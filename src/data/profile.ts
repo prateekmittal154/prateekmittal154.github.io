@@ -6,15 +6,14 @@ export interface SocialLink {
 
 export const profile = {
   name: 'Prateek Mittal',
-  tagline: 'Writer · Researcher · Thinker · Former Academic Head @ Pratigya Abhiyan',
+  tagline: 'AI Decision Science Analyst · Medical AI Researcher · Writer',
   roles: [
-    'Former Academic Head @ Pratigya Abhiyan (Grassroots Education)',
     'Ind & Func AI Decision Science Analyst @ Accenture',
     'Medical AI Researcher @ VEDAs Lab & Yale BrainLM Contributor',
     'Founder @ Foundation for Ethical AI in Healthcare',
     'M.Sc. Data Science & AI @ BITS Pilani (9.50 CGPA)',
   ],
-  bio: `Exploring the intersections where mathematics, human dignity, and contemplation meet. From teaching children on grassroots classroom floors with Pratigya Abhiyan, to medical AI research at MICCAI and Yale BrainLM, and writing poetry and philosophical reflections in the quiet hours.`,
+  bio: `AI Decision Science Analyst at Accenture and medical AI researcher working across clinical foundation models, diagnostic imaging, and statistical learning. Research portfolio includes peer-reviewed work in TMLR, ICLR (BrainLM), MICCAI, and Health Policy & Technology. In quieter hours, I write poetry, study philosophy, and reflect on technology and human dignity.`,
   location: 'Gurugram & Faridabad, India',
   email: 'prateekmittal154@gmail.com',
   phone: '+91-9205119313',

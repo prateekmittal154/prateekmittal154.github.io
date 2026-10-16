@@ -5,11 +5,7 @@ import { publications } from '../data/publications';
 import { getCollection } from 'astro:content';
 
 const allWritings = await getCollection('writing');
-const writings = allWritings.sort((a, b) => {
-  if (a.slug === 'pratigya-abhiyan') return -1;
-  if (b.slug === 'pratigya-abhiyan') return 1;
-  return b.data.date.valueOf() - a.data.date.valueOf();
-});
+const writings = allWritings.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const featuredPapers = publications.filter((p) =>
   ['miccai-2026-inverse-protocol', 'tmlr-2026-subsampling', 'iclr-2024-brainlm', 'hlpt-2026-accountability'].includes(p.id)
@@ -21,17 +17,17 @@ const featuredPapers = publications.filter((p) =>
     
     <!-- Introduction with Portrait -->
     <section class="space-y-6">
-      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center justify-between gap-6 pb-4">
+      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center justify-between gap-6 pb-2">
         <div class="space-y-1">
           <h1 class="text-3xl sm:text-4xl font-serif font-medium text-warm-900 dark:text-warm-50 tracking-tight">
             Prateek Mittal
           </h1>
           <p class="text-stone-600 dark:text-stone-400 font-sans text-sm">
-            Researcher, writer, and analyst based in India.
+            AI Decision Science Analyst · Medical AI Researcher · Writer
           </p>
         </div>
 
-        <!-- Real Portrait -->
+        <!-- Portrait -->
         <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-warm-200 dark:border-warm-800 shadow-sm flex-shrink-0">
           <img
             src="/images/prateek.png"
@@ -42,19 +38,16 @@ const featuredPapers = publications.filter((p) =>
         </div>
       </div>
 
-      <!-- Human Narrative Intro -->
+      <!-- Narrative Bio -->
       <div class="space-y-4 text-stone-800 dark:text-stone-200 text-lg leading-relaxed">
         <p>
-          Hello. I spend my time exploring the intersection between empirical science, social responsibility, and human contemplation.
+          Hello. I'm an AI Decision Science Analyst at <strong>Accenture Strategy & Consulting</strong>, and a medical AI researcher collaborating with the <strong>VEDAs Lab</strong> and co-authors from <strong>Yale University</strong>.
         </p>
         <p>
-          By day, I work on decision science and AI workflows at <strong>Accenture Strategy & Consulting</strong>, and research medical imaging and foundation models with the <strong>VEDAs Lab</strong> and collaborators from <strong>Yale University</strong>. 
+          My work spans production-scale GenAI, clinical diagnostics, and robust machine learning—with peer-reviewed research across <strong>MICCAI 2026</strong> (Society Travel Grant & 3 Oral presentations), <strong>TMLR</strong>, <strong>ICLR</strong> (BrainLM), and <strong>Health Policy and Technology</strong>.
         </p>
         <p>
-          Long before any of that, I spent four formative years at <strong>Pratigya Abhiyan</strong> teaching children in underprivileged communities—an experience that completely changed how I think about education, privilege, and what technology ought to be for.
-        </p>
-        <p>
-          In quieter hours, I write poetry in Hindi and English, study classical Indian philosophy, and reflect on the human condition.
+          Beyond research and corporate algorithms, I write poetry in Hindi and English, study classical philosophy, and lead the <strong>Foundation for Ethical AI in Healthcare</strong>. Earlier during my Bachelor's at Thapar Institute, I also spent four formative years with <strong>Pratigya Abhiyan</strong>—progressing from a volunteer teacher to Academic Head—working with young learners in underserved communities.
         </p>
       </div>
 
@@ -73,37 +66,7 @@ const featuredPapers = publications.filter((p) =>
         </a>
         <span>·</span>
         <a href="/journey" class="hover:text-stone-900 dark:hover:text-stone-100 hover:underline">
-          CV & Journey
-        </a>
-      </div>
-    </section>
-
-    <!-- Pratigya Abhiyan Spotlight Feature -->
-    <section class="border-t border-warm-200 dark:border-warm-800 pt-10 space-y-4">
-      <span class="text-xs uppercase tracking-widest text-terracotta-500 font-sans font-semibold">
-        Grassroots & Memoir
-      </span>
-
-      <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50">
-        <a href="/writing/pratigya-abhiyan" class="hover:text-terracotta-500 transition-colors">
-          Pratigya Abhiyan: Lessons from the Grassroots &rarr;
-        </a>
-      </h2>
-
-      <blockquote class="italic text-stone-700 dark:text-stone-300 border-l-2 border-terracotta-500 pl-4 py-1 text-base">
-        "Before I ever trained a neural network or decoded an fMRI scan, my most profound education took place on concrete floors with children whose eyes sparkled with unbroken curiosity."
-      </blockquote>
-
-      <p class="text-stone-700 dark:text-stone-300 text-base leading-relaxed">
-        During my undergraduate years at Thapar Institute, I joined Pratigya Abhiyan as an educator teaching the children of migrant laborers and daily-wage earners. Over four years, I grew into the role of Academic Head—restructuring teaching frameworks, training fellow student volunteers, and learning that genuine intelligence is about empathy and clarity rather than complexity.
-      </p>
-
-      <div class="pt-1">
-        <a
-          href="/writing/pratigya-abhiyan"
-          class="text-sm font-sans text-terracotta-500 hover:underline inline-flex items-center gap-1 font-medium"
-        >
-          Read the full essay & documentation &rarr;
+          Journey & CV
         </a>
       </div>
     </section>
@@ -189,7 +152,7 @@ const featuredPapers = publications.filter((p) =>
         </a>
       </div>
       <p class="text-sm text-stone-600 dark:text-stone-400">
-        Photographs and snapshots between classrooms, conference travels in Strasbourg, late nights at research whiteboards, and quiet books.
+        Photographs and snapshots between conference travels in Strasbourg, laboratory whiteboards, Pratigya classrooms, and quiet reading corners.
       </p>
     </section>
 
