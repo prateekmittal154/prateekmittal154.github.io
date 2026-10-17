@@ -1,0 +1,280 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { researchProjects, type ResearchProject } from '../../data/projects';
+import { publications } from '../../data/publications';
+import PublicationCard from '../../components/PublicationCard.astro';
+
+export function getStaticPaths() {
+  return researchProjects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: ResearchProject;
+}
+
+const { project } = Astro.props;
+
+// Find any matching publications
+const relatedPubs = publications.filter((p) =>
+  p.id.includes(project.id) ||
+  project.title.toLowerCase().includes(p.venue.toLowerCase()) ||
+  p.badges?.some((b) => project.tags.includes(b))
+);
+---
+
+<BaseLayout
+  title={`${project.title} — Research Project · Prateek Mittal`}
+  description={project.summary}
+  image={project.coverImage}
+>
+  <div class="max-w-5xl mx-auto px-6 sm:px-8 py-8 sm:py-12 space-y-12 sm:space-y-14">
+    <!-- Back Navigation -->
+    <div>
+      <a
+        href="/research"
+        class="text-xs font-sans text-stone-500 dark:text-stone-400 hover:text-brick-600 dark:hover:text-brick-500 inline-flex items-center gap-1.5 font-medium group"
+      >
+        <span class="group-hover:-translate-x-0.5 transition-transform">&larr;</span>
+        <span>Back to Research & Projects Archive</span>
+      </a>
+    </div>
+
+    <!-- Project Header -->
+    <header class="space-y-4 border-b border-warm-200 dark:border-warm-800 pb-8">
+      <div class="flex flex-wrap items-center gap-2.5 text-xs font-sans">
+        <span class="text-brick-600 dark:text-brick-500 font-semibold uppercase tracking-wider text-[11px]">
+          Research Case Study
+        </span>
+        <span class="text-stone-400">·</span>
+        <span class="bg-warm-100 dark:bg-warm-800/60 text-stone-700 dark:text-stone-300 px-2.5 py-0.5 rounded font-medium border border-warm-200/80 dark:border-warm-700/60">
+          {project.venue}
+        </span>
+        <span class="text-stone-400">·</span>
+        <span class="text-stone-500">{project.period}</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-normal text-warm-900 dark:text-warm-50 leading-tight">
+        {project.title}
+      </h1>
+
+      <p class="text-lg sm:text-xl text-stone-600 dark:text-stone-400 font-serif italic leading-relaxed">
+        {project.subtitle}
+      </p>
+
+      <!-- Key Metrics Strip -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-warm-200/60 dark:border-warm-800/60">
+        {project.metrics.map((m) => (
+          <div class="p-3 rounded-lg bg-warm-100/60 dark:bg-warm-900/40 border border-warm-200/60 dark:border-warm-800/60">
+            <span class="text-[11px] font-sans text-stone-400 uppercase tracking-wider block">
+              {m.label}
+            </span>
+            <span class="text-lg sm:text-xl font-serif font-medium text-stone-900 dark:text-stone-100">
+              {m.value}
+            </span>
+          </div>
+        ))}
+      </div>
+    </header>
+
+    <!-- Hero Image Banner -->
+    {project.coverImage && (
+      <div class="aspect-[16/8] sm:aspect-[21/9] rounded-2xl overflow-hidden border border-warm-200 dark:border-warm-800 shadow-sm bg-warm-200 dark:bg-warm-800">
+        <img
+          src={project.coverImage}
+          alt={project.title}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    )}
+
+    <!-- 2-Column Deep Dive Body -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+      
+      <!-- Main Content: Problem, Novelty, Impact -->
+      <main class="lg:col-span-8 space-y-10">
+        <!-- Overview / Executive Summary -->
+        <section class="space-y-3">
+          <h2 class="text-xs uppercase tracking-widest text-brick-600 dark:text-brick-500 font-sans font-semibold">
+            Executive Summary
+          </h2>
+          <p class="font-serif text-[17px] sm:text-lg text-stone-800 dark:text-stone-200 leading-[1.85] text-justified hyphens-auto">
+            {project.summary}
+          </p>
+        </section>
+
+        <!-- 1. The Core Problem & Motivation -->
+        <section class="space-y-3 border-t border-warm-200 dark:border-warm-800 pt-8">
+          <h2 class="text-xs uppercase tracking-widest text-brick-600 dark:text-brick-500 font-sans font-semibold">
+            The Scientific & Clinical Challenge
+          </h2>
+          <h3 class="text-2xl font-serif font-medium text-stone-900 dark:text-stone-100">
+            Why Standard Volumetric Approaches Fail
+          </h3>
+          <p class="font-serif text-[16px] sm:text-[17px] text-stone-800 dark:text-stone-200 leading-[1.85] text-justified hyphens-auto">
+            {project.problem}
+          </p>
+        </section>
+
+        <!-- 2. Core Novelty & Methodology -->
+        <section class="space-y-3 border-t border-warm-200 dark:border-warm-800 pt-8">
+          <h2 class="text-xs uppercase tracking-widest text-brick-600 dark:text-brick-500 font-sans font-semibold">
+            Novelty & Methodological Innovation
+          </h2>
+          <h3 class="text-2xl font-serif font-medium text-stone-900 dark:text-stone-100">
+            Formulation & Theoretical Foundations
+          </h3>
+          <p class="font-serif text-[16px] sm:text-[17px] text-stone-800 dark:text-stone-200 leading-[1.85] text-justified hyphens-auto">
+            {project.novelty}
+          </p>
+        </section>
+
+        <!-- 3. Empirical Impact & Results -->
+        <section class="space-y-3 border-t border-warm-200 dark:border-warm-800 pt-8">
+          <h2 class="text-xs uppercase tracking-widest text-brick-600 dark:text-brick-500 font-sans font-semibold">
+            Clinical Impact & Real-World Results
+          </h2>
+          <h3 class="text-2xl font-serif font-medium text-stone-900 dark:text-stone-100">
+            Validation Across Clinical Cohorts
+          </h3>
+          <p class="font-serif text-[16px] sm:text-[17px] text-stone-800 dark:text-stone-200 leading-[1.85] text-justified hyphens-auto">
+            {project.impact}
+          </p>
+        </section>
+
+        <!-- Related Papers Section if available -->
+        {relatedPubs.length > 0 && (
+          <section class="space-y-4 border-t border-warm-200 dark:border-warm-800 pt-8">
+            <h2 class="text-xs uppercase tracking-widest text-brick-600 dark:text-brick-500 font-sans font-semibold">
+              Associated Publications
+            </h2>
+            <div class="space-y-4">
+              {relatedPubs.map((pub) => (
+                <PublicationCard pub={pub} />
+              ))}
+            </div>
+          </section>
+        )}
+      </main>
+
+      <!-- Sidebar: Mentors, Institution, Action Links -->
+      <aside class="lg:col-span-4 space-y-6">
+        <div class="p-5 rounded-2xl border border-warm-200 dark:border-warm-800 bg-warm-50 dark:bg-warm-900/60 shadow-sm space-y-5">
+          <h3 class="font-serif text-lg font-medium text-stone-900 dark:text-stone-100 border-b border-warm-200/80 dark:border-warm-800/80 pb-2.5">
+            Project Information
+          </h3>
+
+          <!-- Institution -->
+          <div class="space-y-1">
+            <span class="text-xs font-sans text-stone-400 block uppercase tracking-wider text-[10px]">
+              Institutional Anchor
+            </span>
+            <p class="font-sans text-sm font-medium text-stone-900 dark:text-stone-100">
+              {project.institution}
+            </p>
+          </div>
+
+          <!-- Mentors & Collaborators -->
+          <div class="space-y-1.5">
+            <span class="text-xs font-sans text-stone-400 block uppercase tracking-wider text-[10px]">
+              Mentors & Co-Investigators
+            </span>
+            <ul class="space-y-1 text-sm font-sans text-stone-700 dark:text-stone-300">
+              {project.mentors.map((m) => (
+                <li class="flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-brick-500"></span>
+                  <span>{m}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Status & Period -->
+          <div class="space-y-1">
+            <span class="text-xs font-sans text-stone-400 block uppercase tracking-wider text-[10px]">
+              Status & Timeline
+            </span>
+            <p class="font-sans text-xs text-stone-600 dark:text-stone-300">
+              <span class="font-medium text-brick-600 dark:text-brick-500">{project.status}</span> · {project.period}
+            </p>
+          </div>
+
+          <!-- Tags -->
+          <div class="space-y-1.5 pt-1 border-t border-warm-200/80 dark:border-warm-800/80">
+            <span class="text-xs font-sans text-stone-400 block uppercase tracking-wider text-[10px]">
+              Research Domains
+            </span>
+            <div class="flex flex-wrap gap-1.5">
+              {project.tags.map((t) => (
+                <span class="text-[11px] font-sans text-stone-600 dark:text-stone-400 bg-warm-100 dark:bg-warm-800/60 px-2 py-0.5 rounded border border-warm-200/60 dark:border-warm-700/60">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Action Links Buttons -->
+          <div class="pt-3 border-t border-warm-200/80 dark:border-warm-800/80 space-y-2">
+            {project.links.paper && (
+              <a
+                href={project.links.paper}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-warm-900 text-warm-50 dark:bg-warm-100 dark:text-warm-900 text-xs font-sans font-medium hover:bg-brick-600 dark:hover:bg-brick-500 dark:hover:text-white transition-colors"
+              >
+                <span>Read Full Paper</span>
+                <span>&rarr;</span>
+              </a>
+            )}
+
+            {project.links.code && (
+              <a
+                href={project.links.code}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg border border-warm-300 dark:border-warm-700 text-stone-700 dark:text-stone-300 text-xs font-sans font-medium hover:border-brick-500 hover:text-brick-600 dark:hover:text-brick-400 transition-colors"
+              >
+                <span>View Code Repository</span>
+                <span>&rarr;</span>
+              </a>
+            )}
+
+            {project.links.doi && (
+              <a
+                href={`https://doi.org/${project.links.doi}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg border border-warm-300 dark:border-warm-700 text-stone-700 dark:text-stone-300 text-xs font-sans font-medium hover:border-brick-500 transition-colors"
+              >
+                <span>Official DOI</span>
+                <span>&rarr;</span>
+              </a>
+            )}
+          </div>
+        </div>
+
+        <!-- Schedule Discussion Callout -->
+        <div class="p-5 rounded-xl border border-warm-200 dark:border-warm-800 bg-warm-100/50 dark:bg-warm-900/30 space-y-2.5">
+          <h4 class="font-serif font-medium text-sm text-warm-900 dark:text-warm-50">
+            Discuss This Research
+          </h4>
+          <p class="text-xs font-sans text-stone-600 dark:text-stone-400 leading-relaxed">
+            Interested in reproducing these methods, clinical collaborations, or exploring extensions? Let's talk.
+          </p>
+          <a
+            href="https://calendly.com/prateekmittal154/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs font-sans text-brick-600 dark:text-brick-500 font-medium hover:underline inline-flex items-center gap-1 pt-1"
+          >
+            <span>Book a 30-min conversation</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</BaseLayout>

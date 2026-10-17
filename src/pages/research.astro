@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PublicationCard from '../components/PublicationCard.astro';
 import { publications } from '../data/publications';
+import { researchProjects } from '../data/projects';
 
 const types = [
   { id: 'all', label: 'All Papers' },
@@ -14,35 +15,120 @@ const types = [
 
 <BaseLayout
   title="Research & Publications — Prateek Mittal"
-  description="Peer-reviewed publications and preprints in medical AI, differential geometry, and statistical learning."
+  description="Peer-reviewed publications, in-depth research case studies, and preprints in medical AI, differential geometry, and statistical learning."
 >
-  <div class="max-w-5xl mx-auto px-6 sm:px-8 py-8 sm:py-12 space-y-10 sm:space-y-12">
+  <div class="max-w-5xl mx-auto px-6 sm:px-8 py-8 sm:py-12 space-y-12 sm:space-y-14">
     <!-- Header -->
     <div class="space-y-3 border-b border-warm-200 dark:border-warm-800 pb-6">
       <h1 class="text-3xl sm:text-4xl font-serif font-medium text-warm-900 dark:text-warm-50 tracking-tight">
-        Research & Publications
+        Research & Case Studies
       </h1>
-      <p class="text-stone-600 dark:text-stone-400 font-sans text-sm leading-relaxed max-w-2xl text-left">
-        Peer-reviewed journal papers (TMLR, Health Policy & Technology), conference contributions (MICCAI 2026, ICLR BrainLM), and preprints across differential geometry and healthcare accountability.
+      <p class="text-stone-600 dark:text-stone-400 font-sans text-sm leading-relaxed max-w-3xl text-left">
+        Investigating high-dimensional learning theory, clinical foundation models, and Riemannian differential geometry. Conducted primarily with the <strong>Vision Exploration & Data Analytics (VEDAs) Lab at MNNIT Allahabad</strong> under <strong>Dr. Joohi Chauhan</strong> and <strong>Dr. Prabal Pratap Singh</strong>, with formative 2024 neuroimaging foundation model research at <strong>Yale University</strong> under <strong>David van Dijk</strong>.
       </p>
     </div>
 
-    <!-- Category Filters -->
-    <div class="flex flex-wrap gap-2 border-b border-warm-200 dark:border-warm-800 pb-4 text-xs font-sans" id="pub-filters">
-      {types.map((type) => (
-        <button
-          type="button"
-          data-type={type.id}
-          class={`px-3 py-1 rounded-full transition-colors ${
-            type.id === 'all'
-              ? 'bg-warm-900 text-warm-50 dark:bg-warm-100 dark:text-warm-900 font-medium'
-              : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 bg-warm-100/60 dark:bg-warm-800/40'
-          }`}
-        >
-          {type.label}
-        </button>
-      ))}
-    </div>
+    <!-- 1. Featured Research Projects & In-Depth Case Studies -->
+    <section class="space-y-6">
+      <div class="space-y-1 border-b border-warm-200 dark:border-warm-800 pb-3">
+        <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50">
+          In-Depth Research Case Studies
+        </h2>
+        <p class="text-xs text-stone-500 font-sans">
+          Click on any project to explore full mathematical formulation, clinical novelty, benchmarks, and reproducibility links.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {researchProjects.map((proj) => (
+          <article class="rounded-xl overflow-hidden border border-warm-200 dark:border-warm-800 bg-warm-50/60 dark:bg-warm-900/40 hover:border-brick-500/50 transition-all flex flex-col justify-between group shadow-sm">
+            <div class="aspect-[16/9] overflow-hidden bg-warm-200 dark:bg-warm-800 relative">
+              <img
+                src={proj.coverImage}
+                alt={proj.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3 bg-warm-950/85 backdrop-blur-md text-warm-50 text-[11px] font-sans px-2.5 py-0.5 rounded border border-warm-700/60 font-medium">
+                {proj.venue}
+              </div>
+            </div>
+
+            <div class="p-5 space-y-3 flex-grow flex flex-col justify-between">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between text-xs font-sans text-stone-400">
+                  <span class="text-brick-600 dark:text-brick-500 font-medium uppercase text-[10px] tracking-wider">
+                    {proj.institution}
+                  </span>
+                  <span>{proj.period}</span>
+                </div>
+
+                <h3 class="font-serif text-lg font-medium text-stone-900 dark:text-stone-100 group-hover:text-brick-600 dark:group-hover:text-brick-500 transition-colors leading-snug">
+                  <a href={`/research/${proj.id}`}>
+                    {proj.title}
+                  </a>
+                </h3>
+
+                <p class="text-xs text-stone-600 dark:text-stone-300 font-sans line-clamp-3 leading-relaxed text-left">
+                  {proj.summary}
+                </p>
+
+                <!-- Mentors strip -->
+                <div class="pt-1 text-[11px] font-sans text-stone-500">
+                  <span class="font-medium text-stone-700 dark:text-stone-300">Mentors:</span> {proj.mentors.join(', ')}
+                </div>
+              </div>
+
+              <!-- Metrics pills & Case Study Link -->
+              <div class="pt-3 border-t border-warm-200/60 dark:border-warm-800/60 flex items-center justify-between text-xs font-sans">
+                <div class="flex gap-1.5">
+                  {proj.metrics.slice(0, 2).map((m) => (
+                    <span class="bg-warm-100 dark:bg-warm-800/80 text-stone-700 dark:text-stone-300 text-[10px] px-2 py-0.5 rounded font-medium">
+                      {m.label}: {m.value}
+                    </span>
+                  ))}
+                </div>
+                <a
+                  href={`/research/${proj.id}`}
+                  class="text-brick-600 dark:text-brick-500 font-medium hover:underline inline-flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform"
+                >
+                  <span>Read Case Study</span>
+                  <span>&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- 2. Complete Bibliography & Publications Archive -->
+    <section class="space-y-6 border-t border-warm-200 dark:border-warm-800 pt-10">
+      <div class="space-y-1">
+        <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50">
+          Complete Publications Archive
+        </h2>
+        <p class="text-xs text-stone-500 font-sans">
+          Peer-reviewed journal articles, conference proceedings, workshop contributions, and preprints.
+        </p>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="flex flex-wrap gap-2 border-b border-warm-200 dark:border-warm-800 pb-4 text-xs font-sans" id="pub-filters">
+        {types.map((type) => (
+          <button
+            type="button"
+            data-type={type.id}
+            class={`px-3 py-1 rounded-full transition-colors ${
+              type.id === 'all'
+                ? 'bg-warm-900 text-warm-50 dark:bg-warm-100 dark:text-warm-900 font-medium'
+                : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 bg-warm-100/60 dark:bg-warm-800/40'
+            }`}
+          >
+            {type.label}
+          </button>
+        ))}
+      </div>
 
     <!-- Publications List -->
     <div class="space-y-8" id="pubs-list">

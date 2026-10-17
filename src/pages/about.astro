@@ -2,13 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../data/profile';
 import { education } from '../data/experience';
+import { mentors } from '../data/mentors';
 ---
 
 <BaseLayout
   title="About — Prateek Mittal"
-  description="Personal biography, background, and perspectives of Prateek Mittal."
+  description="Personal biography, academic mentorship at MNNIT Allahabad and Yale, industry experience, and perspectives of Prateek Mittal."
 >
-  <div class="max-w-5xl mx-auto px-6 sm:px-8 py-8 sm:py-12 space-y-10 sm:space-y-12">
+  <div class="max-w-5xl mx-auto px-6 sm:px-8 py-8 sm:py-12 space-y-12 sm:space-y-14">
     
     <!-- Page Header -->
     <div class="space-y-2 border-b border-warm-200 dark:border-warm-800 pb-6">
@@ -16,7 +17,7 @@ import { education } from '../data/experience';
         About Me
       </h1>
       <p class="text-stone-600 dark:text-stone-400 font-sans text-sm">
-        Background, research interests, and personal perspectives.
+        Background, research trajectory, the mentors who guided me, and personal perspectives.
       </p>
     </div>
 
@@ -30,33 +31,36 @@ import { education } from '../data/experience';
         </p>
 
         <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50 pt-3 text-left">
-          Medical AI & Academic Research
+          Academic Research & Collaborations
         </h2>
         <p>
-          In academic research, I work on problems where differential geometry and statistical theory help us interpret biological complexity. With the <strong>VEDAs Lab</strong> and my co-authors, this has led to five accepted contributions at <strong>MICCAI 2026</strong> (including three oral presentations and the MICCAI Society Travel Grant) and theoretical work on robust high-dimensional subsampling published in <strong>Transactions on Machine Learning Research (TMLR)</strong>.
+          My research is rooted in problems where differential geometry and statistical theory help us interpret biological complexity. Primarily, this work has evolved in close collaboration with the <strong>Vision Exploration & Data Analytics (VEDAs) Lab</strong> at <strong>Motilal Nehru National Institute of Technology (MNNIT) Allahabad</strong> under the continuous mentorship of <strong>Dr. Joohi Chauhan</strong>, who has guided my academic research since my undergraduate days at Thapar Institute.
         </p>
         <p>
-          At <strong>Yale University</strong>, I contributed to <strong>BrainLM</strong> (ICLR 2024)—a foundation model trained on 6,700 hours of whole-brain fMRI recordings to decode human cognitive states from non-invasive functional neuroimaging.
+          Starting in 2025, <strong>Dr. Prabal Pratap Singh</strong> joined as a close collaborator across multiple initiatives. Together, our work has led to five accepted contributions at <strong>MICCAI 2026</strong> (including three oral presentations and the competitive MICCAI Society Travel Grant) and theoretical work on adaptive stratified subsampling published in <strong>Transactions on Machine Learning Research (TMLR)</strong>.
+        </p>
+        <p>
+          In 2024, my early research journey was deeply enriched through a remote research collaboration with <strong>Dr. David van Dijk</strong> at <strong>Yale University</strong>, contributing to <strong>BrainLM</strong> (ICLR 2024)—a foundation model trained on 6,700 hours of whole-brain fMRI recordings to decode human cognitive states from functional neuroimaging. That experience fundamentally shaped how I think about large-scale foundation modeling in biology.
         </p>
 
         <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50 pt-3 text-left">
-          Industry & Enterprise Decision Science
+          Industry Decision Science & Clinical Operations
         </h2>
         <p>
           In industry, I work as an AI Decision Science Analyst within <strong>Accenture Strategy & Consulting</strong>'s AI & Data ecosystem in Gurugram, contributing to backend development, problem framing, and enterprise transformation workflows.
         </p>
         <p>
-          Prior to Accenture, I was a Data Scientist – Assistant Manager at <strong>Dr. Lal PathLabs</strong>, where I built automated OCR document extraction pipelines using Azure Document Intelligence, doctor-facing WhatsApp RAG assistants, and unified health-score frameworks tailored to Indian reference intervals.
+          Prior to Accenture, I spent two formative years at <strong>Dr. Lal PathLabs</strong> as Data Scientist – Assistant Manager. My time there was heavily shaped by senior leadership: I received strategic IT and enterprise transformation guidance from <strong>Mr. Munender Soperna (Group CIDO)</strong> and cloud engineering mentorship from <strong>Gaurav Sharma</strong>. On clinical systems, I worked under <strong>Dr. Reena Nakra (Principal Director – Lab Operations & CSO)</strong> and <strong>Dr. Nimmi Kansal (National Head – Clinical Chemistry)</strong> to ensure that patient-facing RAG assistants and unified health-score algorithms were rigorously grounded in diagnostic validity and Indian population reference intervals.
         </p>
 
         <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50 pt-3 text-left">
-          Ethics & Grassroots Foundations
+          Grassroots Roots & Ethical AI
         </h2>
         <p>
-          Because technology is only as good as its safety in the hands of vulnerable patients, I founded the <strong>Foundation for Ethical AI in Healthcare</strong>—a Section 8 initiative aimed at addressing the regulatory and clinical accountability gap for clinical algorithms in India (published in <em>Health Policy and Technology</em>).
+          Long before publishing machine learning papers, my most humbling education occurred during my Bachelor’s degree in Computer Engineering at Thapar Institute. I spent four years with <strong>Pratigya Abhiyan</strong>, an initiative providing free education to children of daily-wage laborers and migrant families. Rising from volunteer educator to Academic Head, sitting on concrete floors teaching children taught me empathy, listening, and that brilliance exists everywhere—opportunity does not.
         </p>
         <p>
-          Earlier during my Bachelor’s degree in Computer Engineering at Thapar Institute, I spent four formative years with <strong>Pratigya Abhiyan</strong>. Starting as a volunteer educator teaching children from daily-wage worker families and later serving as Academic Head, it grounded my understanding of education, empathy, and social responsibility.
+          That grassroots realization led me to found the <strong>Foundation for Ethical AI in Healthcare (FEAIH)</strong>—a Section 8 initiative aimed at addressing the regulatory, clinical, and liability gap for clinical algorithms in India (published in <em>Health Policy and Technology</em>).
         </p>
 
         <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50 pt-3 text-left">
@@ -88,21 +92,47 @@ import { education } from '../data/experience';
               <span class="font-medium text-stone-900 dark:text-stone-100">Gurugram & Faridabad, India</span>
             </div>
             <div class="pt-2">
-              <span class="text-stone-400 block">Current Focus</span>
-              <span class="font-medium text-stone-900 dark:text-stone-100">Decision Science @ Accenture</span>
+              <span class="text-stone-400 block">Current Industry</span>
+              <span class="font-medium text-stone-900 dark:text-stone-100">AI Decision Science @ Accenture</span>
             </div>
             <div class="pt-2">
-              <span class="text-stone-400 block">Research</span>
-              <span class="font-medium text-stone-900 dark:text-stone-100">Medical AI · VEDAs Lab & Yale</span>
+              <span class="text-stone-400 block">Research Collaboration</span>
+              <span class="font-medium text-stone-900 dark:text-stone-100">MNNIT Allahabad (VEDAs Lab)</span>
+            </div>
+            <div class="pt-2">
+              <span class="text-stone-400 block">Formative Research</span>
+              <span class="font-medium text-stone-900 dark:text-stone-100">Yale BrainLM (2024)</span>
             </div>
           </div>
         </div>
 
+        <!-- 30-Min Discussion Booking Box -->
+        <div class="rounded-xl border border-warm-200 dark:border-warm-800 p-4 text-xs font-sans space-y-2.5 bg-warm-100/60 dark:bg-warm-900/40">
+          <h3 class="font-serif font-medium text-sm text-warm-900 dark:text-warm-50 flex items-center gap-1.5">
+            <span>Schedule a 30-Min Call</span>
+          </h3>
+          <p class="text-stone-600 dark:text-stone-400 leading-relaxed">
+            Interested in discussing research collaborations, healthcare AI ethics, or decision science? Pick a convenient time on my calendar:
+          </p>
+          <a
+            href="https://calendly.com/prateekmittal154/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-brick-600 hover:bg-brick-700 text-white font-medium text-xs transition-colors shadow-sm"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span>Book 30-Min on Calendly</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+
         <!-- Contact Box -->
         <div class="rounded-xl border border-warm-200 dark:border-warm-800 p-4 text-xs font-sans space-y-2">
-          <h3 class="font-serif font-medium text-sm text-warm-900 dark:text-warm-50">Get in touch</h3>
+          <h3 class="font-serif font-medium text-sm text-warm-900 dark:text-warm-50">Direct Email</h3>
           <p class="text-stone-500">
-            Feel free to write for research collaborations or discussions:
+            For academic queries, preprint discussions, or notes:
           </p>
           <a
             href="mailto:prateekmittal154@gmail.com"
@@ -114,6 +144,68 @@ import { education } from '../data/experience';
       </div>
 
     </div>
+
+    <!-- Mentors & Advisors Grid on About Page -->
+    <section class="border-t border-warm-200 dark:border-warm-800 pt-10 space-y-6">
+      <div class="space-y-1 border-b border-warm-200 dark:border-warm-800 pb-3">
+        <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50">
+          Mentors & Academic Advisors
+        </h2>
+        <p class="text-xs text-stone-500 font-sans">
+          The researchers, clinicians, and technology leaders who have shaped my thinking, research rigor, and engineering ethics.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {mentors.map((m) => (
+          <div class="p-4 rounded-xl border border-warm-200/90 dark:border-warm-800/90 bg-warm-50/50 dark:bg-warm-900/40 hover:border-brick-500/40 transition-colors space-y-2.5 flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-[11px] font-sans">
+                <span class="text-brick-600 dark:text-brick-500 font-medium uppercase tracking-wider text-[10px]">
+                  {m.category === 'academic' ? 'Academic Mentor' : 'Industry Guidance'}
+                </span>
+                <span class="text-stone-400">{m.period}</span>
+              </div>
+
+              <h4 class="font-serif text-base font-medium text-stone-900 dark:text-stone-100">
+                {m.name}
+              </h4>
+              <p class="text-xs font-sans text-stone-500 dark:text-stone-400 font-medium">
+                {m.role} · <span class="italic">{m.affiliation}</span>
+              </p>
+
+              <p class="text-xs font-sans text-stone-600 dark:text-stone-300 leading-relaxed pt-1 text-left">
+                {m.relationship}
+              </p>
+            </div>
+
+            <div class="pt-2 text-xs font-sans flex items-center justify-between border-t border-warm-200/60 dark:border-warm-800/60">
+              {m.linkedin && (
+                <a
+                  href={m.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-brick-600 dark:text-brick-500 hover:underline font-medium inline-flex items-center gap-1"
+                >
+                  <span>LinkedIn Profile</span>
+                  <span>↗</span>
+                </a>
+              )}
+              {m.website && (
+                <a
+                  href={m.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-stone-400 hover:text-stone-700 dark:hover:text-stone-200"
+                >
+                  Lab Website ↗
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
 
   </div>
 </BaseLayout>

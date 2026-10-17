@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { experiences, education } from '../data/experience';
 import { profile } from '../data/profile';
+import { mentors } from '../data/mentors';
 
 const industryExp = experiences.filter((e) => e.type === 'industry');
 const researchExp = experiences.filter((e) => e.type === 'research');
@@ -216,7 +217,67 @@ const leadershipExp = experiences.filter((e) => e.type === 'leadership' || e.typ
       </div>
     </section>
 
-    <!-- 5. Selected Honors & Scholarly Reviewing -->
+    <!-- 5. Mentors & Key Influences -->
+    <section class="border-t border-warm-200 dark:border-warm-800 pt-10 space-y-8">
+      <div class="space-y-1">
+        <h2 class="text-xs uppercase tracking-widest text-brick-600 dark:text-brick-500 font-sans font-semibold">
+          Mentors & Advisors
+        </h2>
+        <p class="text-xs text-stone-500 font-sans">
+          Professors, research advisors, and executive leaders who have shaped my scientific and professional direction.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {mentors.map((m) => (
+          <div class="p-4 rounded-xl border border-warm-200/90 dark:border-warm-800/90 bg-warm-50/50 dark:bg-warm-900/40 hover:border-brick-500/40 transition-colors space-y-2 flex flex-col justify-between">
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-[11px] font-sans">
+                <span class="text-brick-600 dark:text-brick-500 font-medium uppercase tracking-wider text-[10px]">
+                  {m.category === 'academic' ? 'Academic Mentor' : 'Industry Guidance'}
+                </span>
+                <span class="text-stone-400">{m.period}</span>
+              </div>
+              <h4 class="font-serif text-base font-medium text-stone-900 dark:text-stone-100">
+                {m.name}
+              </h4>
+              <p class="text-xs font-sans text-stone-500 dark:text-stone-400">
+                {m.role} · <span class="italic">{m.affiliation}</span>
+              </p>
+              <p class="text-xs font-sans text-stone-600 dark:text-stone-300 pt-1 leading-relaxed text-left">
+                {m.relationship}
+              </p>
+            </div>
+
+            <div class="pt-2 text-xs font-sans flex items-center justify-between border-t border-warm-200/60 dark:border-warm-800/60">
+              {m.linkedin && (
+                <a
+                  href={m.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-brick-600 dark:text-brick-500 hover:underline font-medium inline-flex items-center gap-1"
+                >
+                  <span>LinkedIn</span>
+                  <span>↗</span>
+                </a>
+              )}
+              {m.website && (
+                <a
+                  href={m.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-stone-400 hover:text-stone-700 dark:hover:text-stone-200"
+                >
+                  Lab ↗
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 6. Selected Honors & Scholarly Reviewing -->
     <section class="border-t border-warm-200 dark:border-warm-800 pt-10 space-y-6">
       <h2 class="text-xs uppercase tracking-widest text-brick-600 dark:text-brick-500 font-sans font-semibold">
         Distinctions & Peer Review
@@ -247,6 +308,27 @@ const leadershipExp = experiences.filter((e) => e.type === 'leadership' || e.typ
         </div>
       </div>
     </section>
+
+    <!-- Bottom Discussion CTA -->
+    <div class="rounded-2xl border border-warm-200 dark:border-warm-800 bg-warm-100/60 dark:bg-warm-900/40 p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="space-y-1">
+        <h3 class="font-serif text-xl font-medium text-stone-900 dark:text-stone-100">
+          Interested in Research Collaboration or Discussion?
+        </h3>
+        <p class="text-xs sm:text-sm text-stone-600 dark:text-stone-400 font-sans">
+          Whether regarding medical AI foundation models, differential geometry, or decision science, feel free to schedule a 30-minute conversation.
+        </p>
+      </div>
+      <a
+        href="https://calendly.com/prateekmittal154/30min"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-brick-600 hover:bg-brick-700 text-white font-medium text-xs font-sans transition-colors shadow-sm whitespace-nowrap"
+      >
+        <span>Schedule 30-Min Meet</span>
+        <span>&rarr;</span>
+      </a>
+    </div>
 
   </div>
 </BaseLayout>

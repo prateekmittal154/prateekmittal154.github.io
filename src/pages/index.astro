@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PublicationCard from '../components/PublicationCard.astro';
 import { profile } from '../data/profile';
 import { publications } from '../data/publications';
+import { researchProjects } from '../data/projects';
+import { mentors } from '../data/mentors';
 import { moments } from '../data/moments';
 import { getCollection } from 'astro:content';
 
@@ -13,6 +15,7 @@ const featuredPapers = publications.filter((p) =>
   ['miccai-2026-inverse-protocol', 'tmlr-2026-subsampling', 'iclr-2024-brainlm', 'hlpt-2026-accountability'].includes(p.id)
 );
 
+const featuredProjects = researchProjects.slice(0, 4);
 const previewMoments = moments.slice(0, 3);
 ---
 
@@ -39,18 +42,30 @@ const previewMoments = moments.slice(0, 3);
         <!-- Justified Narrative Bio in Warm Book Serif -->
         <div class="space-y-3.5 text-stone-800 dark:text-stone-200 font-serif text-[16px] sm:text-[17px] leading-[1.8] text-justified hyphens-auto">
           <p>
-            I am an AI Decision Science Analyst at <strong>Accenture Strategy & Consulting</strong> (Gurugram) and a medical-AI researcher collaborating with the <strong>VEDAs Lab</strong> and co-authors from <strong>Yale University</strong>. My work focuses on high-dimensional machine learning, clinical foundation models, diagnostic imaging, and enterprise decision architectures.
+            I am an AI Decision Science Analyst at <strong>Accenture Strategy & Consulting</strong> (Gurugram) and an active medical-AI researcher collaborating with the <strong>Vision Exploration and Data Analytics (VEDAs) Lab</strong> at <strong>Motilal Nehru National Institute of Technology (MNNIT) Allahabad</strong> under the guidance of <strong>Dr. Joohi Chauhan</strong>—who has mentored me since my undergraduate years at Thapar Institute—and <strong>Dr. Prabal Pratap Singh</strong>.
           </p>
           <p>
-            My research portfolio includes peer-reviewed work in <strong>Transactions on Machine Learning Research (TMLR)</strong>, <strong>MICCAI 2026</strong> (five accepted contributions, three oral presentations, and selection for the MICCAI Society Travel Grant), <strong>ICLR 2024</strong> (BrainLM), and <strong>Health Policy and Technology</strong>.
+            My early research trajectory was shaped in 2024 through remote collaboration with <strong>Dr. David van Dijk</strong> at <strong>Yale University</strong> on whole-brain foundation models (BrainLM, ICLR 2024). Today, my research investigates Riemannian differential geometry (Shape-DNA spectral analysis for pediatric brain lesions), inverse biological learning, and high-dimensional statistical robustness (TMLR 2026, 5 accepted works and 3 Oral presentations at MICCAI 2026 with the MICCAI Society Travel Grant).
           </p>
           <p>
-            Beyond corporate algorithms, I lead the <strong>Foundation for Ethical AI in Healthcare</strong> to bridge the clinical accountability gap in India. During my undergraduate years at Thapar Institute, I dedicated four years to <strong>Pratigya Abhiyan</strong>, rising from volunteer educator to Academic Head teaching children from underserved communities. In quieter hours, I write poetry in Hindi and English and study classical philosophy.
+            Earlier during my Bachelor’s degree, I dedicated four formative years to <strong>Pratigya Abhiyan</strong>, rising from a volunteer educator teaching children from underprivileged families to Academic Head. In industry, my time at Dr. Lal PathLabs was guided by CIO Munender Soperna, Gaurav Sharma, Dr. Reena Nakra, and Dr. Nimmi Kansal. In quieter hours, I write Hindi and English verse and reflect on philosophy.
           </p>
         </div>
 
-        <!-- Action Links -->
-        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 pt-2 text-sm font-sans text-stone-600 dark:text-stone-400">
+        <!-- Action Links & 30-min Meet -->
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-2.5 pt-2 text-sm font-sans text-stone-600 dark:text-stone-400">
+          <a
+            href="https://calendly.com/prateekmittal154/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brick-600 hover:bg-brick-700 text-white font-medium text-xs transition-colors shadow-sm"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span>Schedule 30m Meet</span>
+            <span>&rarr;</span>
+          </a>
           <a
             href="mailto:prateekmittal154@gmail.com"
             class="text-brick-600 dark:text-brick-500 font-medium hover:underline inline-flex items-center gap-1"
@@ -102,11 +117,19 @@ const previewMoments = moments.slice(0, 3);
           <div class="space-y-2 text-xs font-sans text-stone-600 dark:text-stone-300 divide-y divide-warm-200/80 dark:divide-warm-800/80">
             <div class="flex justify-between items-baseline pt-1">
               <span class="text-stone-400">Current Role</span>
-              <span class="font-medium text-stone-900 dark:text-stone-100 text-right">AI Analyst @ Accenture</span>
+              <span class="font-medium text-stone-900 dark:text-stone-100 text-right">AI Analyst @ Accenture S&C</span>
             </div>
             <div class="flex justify-between items-baseline pt-2">
-              <span class="text-stone-400">Affiliation</span>
-              <span class="font-medium text-stone-900 dark:text-stone-100 text-right">VEDAs Lab · Yale BrainLM</span>
+              <span class="text-stone-400">Primary Research</span>
+              <span class="font-medium text-stone-900 dark:text-stone-100 text-right">MNNIT Allahabad (VEDAs Lab)</span>
+            </div>
+            <div class="flex justify-between items-baseline pt-2">
+              <span class="text-stone-400">Formative Work</span>
+              <span class="font-medium text-stone-900 dark:text-stone-100 text-right">Yale BrainLM (2024)</span>
+            </div>
+            <div class="flex justify-between items-baseline pt-2">
+              <span class="text-stone-400">Key Mentors</span>
+              <span class="font-medium text-stone-900 dark:text-stone-100 text-right">Dr. Joohi Chauhan · David van Dijk</span>
             </div>
             <div class="flex justify-between items-baseline pt-2">
               <span class="text-stone-400">Education</span>
@@ -114,7 +137,7 @@ const previewMoments = moments.slice(0, 3);
             </div>
             <div class="flex justify-between items-baseline pt-2">
               <span class="text-stone-400">Distinction</span>
-              <span class="font-medium text-brick-600 dark:text-brick-500 text-right">MICCAI '26 Travel Grant</span>
+              <span class="font-medium text-brick-600 dark:text-brick-500 text-right">MICCAI '26 Travel Grant (3 Orals)</span>
             </div>
           </div>
         </div>
@@ -127,17 +150,17 @@ const previewMoments = moments.slice(0, 3);
         <div class="space-y-1">
           <span class="text-xs font-sans uppercase tracking-wider text-stone-400 block">Conference</span>
           <h4 class="font-serif text-lg font-medium text-stone-900 dark:text-stone-100">MICCAI 2026</h4>
-          <p class="text-xs text-stone-500 font-sans">3 Oral Presentations & Travel Grant</p>
-        </div>
-        <div class="space-y-1">
-          <span class="text-xs font-sans uppercase tracking-wider text-stone-400 block">Neuroimaging</span>
-          <h4 class="font-serif text-lg font-medium text-stone-900 dark:text-stone-100">BrainLM (ICLR)</h4>
-          <p class="text-xs text-stone-500 font-sans">Yale 6,700h fMRI Foundation Model</p>
+          <p class="text-xs text-stone-500 font-sans">3 Oral Presentations · Travel Grant</p>
         </div>
         <div class="space-y-1">
           <span class="text-xs font-sans uppercase tracking-wider text-stone-400 block">Journal Theory</span>
           <h4 class="font-serif text-lg font-medium text-stone-900 dark:text-stone-100">TMLR 2026</h4>
           <p class="text-xs text-stone-500 font-sans">Robust High-Dim Subsampling</p>
+        </div>
+        <div class="space-y-1">
+          <span class="text-xs font-sans uppercase tracking-wider text-stone-400 block">Formative NeuroAI</span>
+          <h4 class="font-serif text-lg font-medium text-stone-900 dark:text-stone-100">BrainLM (ICLR)</h4>
+          <p class="text-xs text-stone-500 font-sans">Yale 6,700h fMRI Model (2024)</p>
         </div>
         <div class="space-y-1">
           <span class="text-xs font-sans uppercase tracking-wider text-stone-400 block">Social Action</span>
@@ -198,6 +221,85 @@ const previewMoments = moments.slice(0, 3);
       </div>
     </section>
 
+    <!-- Featured Research Projects & In-Depth Case Studies -->
+    <section class="space-y-6">
+      <div class="flex items-baseline justify-between border-b border-warm-200 dark:border-warm-800 pb-3">
+        <div class="space-y-1">
+          <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50">
+            Featured Research Projects & Case Studies
+          </h2>
+          <p class="text-xs text-stone-500 font-sans">
+            In-depth breakdowns of mathematical formulations, clinical novelty, and empirical validation across MNNIT Allahabad, Yale, and FEAIH.
+          </p>
+        </div>
+        <a href="/research" class="text-xs font-sans text-brick-600 dark:text-brick-500 hover:underline font-medium">
+          View all projects &rarr;
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {featuredProjects.map((proj) => (
+          <article class="rounded-xl overflow-hidden border border-warm-200 dark:border-warm-800 bg-warm-50/60 dark:bg-warm-900/40 hover:border-brick-500/50 transition-all flex flex-col justify-between group shadow-sm">
+            <div class="aspect-[16/9] overflow-hidden bg-warm-200 dark:bg-warm-800 relative">
+              <img
+                src={proj.coverImage}
+                alt={proj.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3 bg-warm-950/85 backdrop-blur-md text-warm-50 text-[11px] font-sans px-2.5 py-0.5 rounded border border-warm-700/60 font-medium">
+                {proj.venue}
+              </div>
+            </div>
+
+            <div class="p-5 space-y-3 flex-grow flex flex-col justify-between">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between text-xs font-sans text-stone-400">
+                  <span class="text-brick-600 dark:text-brick-500 font-medium uppercase text-[10px] tracking-wider">
+                    {proj.institution}
+                  </span>
+                  <span>{proj.period}</span>
+                </div>
+
+                <h3 class="font-serif text-lg font-medium text-stone-900 dark:text-stone-100 group-hover:text-brick-600 dark:group-hover:text-brick-500 transition-colors leading-snug">
+                  <a href={`/research/${proj.id}`}>
+                    {proj.title}
+                  </a>
+                </h3>
+
+                <p class="text-xs text-stone-600 dark:text-stone-300 font-sans line-clamp-2 leading-relaxed text-left">
+                  {proj.summary}
+                </p>
+
+                <!-- Mentors strip -->
+                <div class="pt-1 text-[11px] font-sans text-stone-500">
+                  <span class="font-medium text-stone-700 dark:text-stone-300">Mentors:</span> {proj.mentors.join(', ')}
+                </div>
+              </div>
+
+              <!-- Metrics pills & Case Study Link -->
+              <div class="pt-3 border-t border-warm-200/60 dark:border-warm-800/60 flex items-center justify-between text-xs font-sans">
+                <div class="flex gap-1.5">
+                  {proj.metrics.slice(0, 2).map((m) => (
+                    <span class="bg-warm-100 dark:bg-warm-800/80 text-stone-700 dark:text-stone-300 text-[10px] px-2 py-0.5 rounded font-medium">
+                      {m.label}: {m.value}
+                    </span>
+                  ))}
+                </div>
+                <a
+                  href={`/research/${proj.id}`}
+                  class="text-brick-600 dark:text-brick-500 font-medium hover:underline inline-flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform"
+                >
+                  <span>Case Study</span>
+                  <span>&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
     <!-- Selected Academic Publications -->
     <section class="space-y-6">
       <div class="flex items-baseline justify-between border-b border-warm-200 dark:border-warm-800 pb-3">
@@ -217,6 +319,68 @@ const previewMoments = moments.slice(0, 3);
       <div class="space-y-6">
         {featuredPapers.map((pub) => (
           <PublicationCard pub={pub} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Mentors & Collaborative Anchors -->
+    <section class="space-y-6 border-t border-warm-200 dark:border-warm-800 pt-10">
+      <div class="space-y-1 border-b border-warm-200 dark:border-warm-800 pb-3">
+        <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50">
+          Mentors & People Who Shaped My Journey
+        </h2>
+        <p class="text-xs text-stone-500 font-sans">
+          No meaningful science or engineering happens in isolation. Deeply indebted to the professors, scientists, and industry leaders who have guided my research and professional growth.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {mentors.map((m) => (
+          <div class="p-4 rounded-xl border border-warm-200/90 dark:border-warm-800/90 bg-warm-50/50 dark:bg-warm-900/40 hover:border-brick-500/40 transition-colors space-y-2.5 flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-[11px] font-sans">
+                <span class="text-brick-600 dark:text-brick-500 font-medium uppercase tracking-wider text-[10px]">
+                  {m.category === 'academic' ? 'Academic Mentor' : 'Industry Guidance'}
+                </span>
+                <span class="text-stone-400">{m.period}</span>
+              </div>
+
+              <h4 class="font-serif text-base font-medium text-stone-900 dark:text-stone-100">
+                {m.name}
+              </h4>
+              <p class="text-xs font-sans text-stone-500 dark:text-stone-400 font-medium">
+                {m.role} · <span class="italic">{m.affiliation}</span>
+              </p>
+
+              <p class="text-xs font-sans text-stone-600 dark:text-stone-300 leading-relaxed pt-1 text-left">
+                {m.relationship}
+              </p>
+            </div>
+
+            <div class="pt-2 text-xs font-sans flex items-center justify-between border-t border-warm-200/60 dark:border-warm-800/60">
+              {m.linkedin && (
+                <a
+                  href={m.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-brick-600 dark:text-brick-500 hover:underline font-medium inline-flex items-center gap-1"
+                >
+                  <span>LinkedIn Profile</span>
+                  <span>↗</span>
+                </a>
+              )}
+              {m.website && (
+                <a
+                  href={m.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-stone-400 hover:text-stone-700 dark:hover:text-stone-200"
+                >
+                  Lab Website ↗
+                </a>
+              )}
+            </div>
+          </div>
         ))}
       </div>
     </section>
