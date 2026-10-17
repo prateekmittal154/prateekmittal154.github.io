@@ -8,11 +8,11 @@ interface Props {
 const { pub } = Astro.props;
 ---
 
-<article class="space-y-2 border-b border-warm-100 dark:border-warm-800/60 pb-6">
+<article class="space-y-2.5 border-b border-warm-200/80 dark:border-warm-800/80 pb-6">
   <!-- Title -->
   <h3 class="font-serif text-lg font-medium text-stone-900 dark:text-stone-100 leading-snug">
     {pub.url ? (
-      <a href={pub.url} target="_blank" rel="noopener noreferrer" class="hover:text-terracotta-500 hover:underline">
+      <a href={pub.url} target="_blank" rel="noopener noreferrer" class="hover:text-brick-600 dark:hover:text-brick-500 hover:underline">
         {pub.title}
       </a>
     ) : (
@@ -40,10 +40,17 @@ const { pub } = Astro.props;
     {pub.venue} ({pub.year})
   </p>
 
+  <!-- Abstract if available -->
+  {pub.abstract && (
+    <p class="text-xs sm:text-[13px] text-stone-600 dark:text-stone-300 font-sans leading-relaxed text-justified hyphens-auto pt-0.5">
+      {pub.abstract}
+    </p>
+  )}
+
   <!-- Badges & Action Links -->
-  <div class="flex flex-wrap items-center gap-3 text-xs font-sans pt-1">
+  <div class="flex flex-wrap items-center gap-2.5 text-xs font-sans pt-1">
     {pub.badges && pub.badges.map((b) => (
-      <span class="text-[11px] text-stone-600 dark:text-stone-300 bg-warm-100 dark:bg-warm-800/60 px-2 py-0.5 rounded">
+      <span class="text-[11px] text-stone-600 dark:text-stone-300 bg-warm-100/80 dark:bg-warm-800/60 px-2 py-0.5 rounded border border-warm-200/60 dark:border-warm-700/60">
         {b}
       </span>
     ))}
@@ -53,9 +60,10 @@ const { pub } = Astro.props;
         href={pub.url}
         target="_blank"
         rel="noopener noreferrer"
-        class="text-terracotta-500 hover:underline font-medium"
+        class="text-brick-600 dark:text-brick-500 hover:underline font-medium inline-flex items-center gap-0.5 ml-1"
       >
-        Paper link &rarr;
+        <span>Paper</span>
+        <span>&rarr;</span>
       </a>
     )}
 

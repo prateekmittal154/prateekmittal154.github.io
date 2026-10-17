@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PublicationCard from '../components/PublicationCard.astro';
 import { profile } from '../data/profile';
 import { publications } from '../data/publications';
+import { moments } from '../data/moments';
 import { getCollection } from 'astro:content';
 
 const allWritings = await getCollection('writing');
@@ -10,150 +12,256 @@ const writings = allWritings.sort((a, b) => b.data.date.valueOf() - a.data.date.
 const featuredPapers = publications.filter((p) =>
   ['miccai-2026-inverse-protocol', 'tmlr-2026-subsampling', 'iclr-2024-brainlm', 'hlpt-2026-accountability'].includes(p.id)
 );
+
+const previewMoments = moments.slice(0, 3);
 ---
 
 <BaseLayout>
-  <div class="max-w-2xl mx-auto px-6 py-14 sm:py-20 space-y-16">
+  <div class="max-w-5xl mx-auto px-6 sm:px-8 py-8 sm:py-12 space-y-12 sm:space-y-14">
     
-    <!-- Introduction with Portrait -->
-    <section class="space-y-6">
-      <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center justify-between gap-6 pb-2">
-        <div class="space-y-1">
-          <h1 class="text-3xl sm:text-4xl font-serif font-medium text-warm-900 dark:text-warm-50 tracking-tight">
+    <!-- Hero: Structured 2-Column Architectural Layout -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+      <!-- Left: Introduction & Narrative -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="space-y-2.5">
+          <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-[11px] font-sans text-stone-600 dark:text-stone-300 bg-warm-100/80 dark:bg-warm-800/60 border border-warm-200/80 dark:border-warm-700/60">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Gurugram & Faridabad, India · Decision Science @ Accenture</span>
+          </div>
+          <h1 class="text-4xl sm:text-5xl font-serif font-normal text-warm-900 dark:text-warm-50 tracking-tight leading-tight">
             Prateek Mittal
           </h1>
-          <p class="text-stone-600 dark:text-stone-400 font-sans text-sm">
+          <p class="text-base text-stone-600 dark:text-stone-400 font-sans font-medium">
             AI Decision Science Analyst · Medical AI Researcher · Writer
           </p>
         </div>
 
-        <!-- Portrait -->
-        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-warm-200 dark:border-warm-800 shadow-sm flex-shrink-0">
-          <img
-            src="/images/prateek.png"
-            alt="Prateek Mittal"
-            class="w-full h-full object-cover"
-            loading="eager"
-          />
+        <!-- Justified Narrative Bio in Warm Book Serif -->
+        <div class="space-y-3.5 text-stone-800 dark:text-stone-200 font-serif text-[16px] sm:text-[17px] leading-[1.8] text-justified hyphens-auto">
+          <p>
+            I am an AI Decision Science Analyst at <strong>Accenture Strategy & Consulting</strong> (Gurugram) and a medical-AI researcher collaborating with the <strong>VEDAs Lab</strong> and co-authors from <strong>Yale University</strong>. My work focuses on high-dimensional machine learning, clinical foundation models, diagnostic imaging, and enterprise decision architectures.
+          </p>
+          <p>
+            My research portfolio includes peer-reviewed work in <strong>Transactions on Machine Learning Research (TMLR)</strong>, <strong>MICCAI 2026</strong> (five accepted contributions, three oral presentations, and selection for the MICCAI Society Travel Grant), <strong>ICLR 2024</strong> (BrainLM), and <strong>Health Policy and Technology</strong>.
+          </p>
+          <p>
+            Beyond corporate algorithms, I lead the <strong>Foundation for Ethical AI in Healthcare</strong> to bridge the clinical accountability gap in India. During my undergraduate years at Thapar Institute, I dedicated four years to <strong>Pratigya Abhiyan</strong>, rising from volunteer educator to Academic Head teaching children from underserved communities. In quieter hours, I write poetry in Hindi and English and study classical philosophy.
+          </p>
+        </div>
+
+        <!-- Action Links -->
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 pt-2 text-sm font-sans text-stone-600 dark:text-stone-400">
+          <a
+            href="mailto:prateekmittal154@gmail.com"
+            class="text-brick-600 dark:text-brick-500 font-medium hover:underline inline-flex items-center gap-1"
+          >
+            prateekmittal154@gmail.com
+          </a>
+          <span>·</span>
+          <a
+            href="https://github.com/prateekmittal154"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-stone-900 dark:hover:text-stone-100 hover:underline"
+          >
+            GitHub
+          </a>
+          <span>·</span>
+          <a
+            href="https://linkedin.com/in/prateek-mittal"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-stone-900 dark:hover:text-stone-100 hover:underline"
+          >
+            LinkedIn
+          </a>
+          <span>·</span>
+          <a
+            href="/journey"
+            class="hover:text-stone-900 dark:hover:text-stone-100 hover:underline font-medium"
+          >
+            Journey & CV &rarr;
+          </a>
         </div>
       </div>
 
-      <!-- Narrative Bio -->
-      <div class="space-y-4 text-stone-800 dark:text-stone-200 text-lg leading-relaxed">
-        <p>
-          Hello. I'm an AI Decision Science Analyst at <strong>Accenture Strategy & Consulting</strong>, and a medical AI researcher collaborating with the <strong>VEDAs Lab</strong> and co-authors from <strong>Yale University</strong>.
-        </p>
-        <p>
-          My work spans production-scale GenAI, clinical diagnostics, and robust machine learning—with peer-reviewed research across <strong>MICCAI 2026</strong> (Society Travel Grant & 3 Oral presentations), <strong>TMLR</strong>, <strong>ICLR</strong> (BrainLM), and <strong>Health Policy and Technology</strong>.
-        </p>
-        <p>
-          Beyond research and corporate algorithms, I write poetry in Hindi and English, study classical philosophy, and lead the <strong>Foundation for Ethical AI in Healthcare</strong>. Earlier during my Bachelor's at Thapar Institute, I also spent four formative years with <strong>Pratigya Abhiyan</strong>—progressing from a volunteer teacher to Academic Head—working with young learners in underserved communities.
-        </p>
-      </div>
+      <!-- Right: Portrait & Key Affiliations Card -->
+      <div class="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-6 items-center lg:items-end">
+        <div class="w-full max-w-sm rounded-2xl overflow-hidden border border-warm-200 dark:border-warm-800 bg-warm-50 dark:bg-warm-900/60 p-4 shadow-sm space-y-4">
+          <!-- Portrait -->
+          <div class="aspect-[4/4.5] w-full rounded-xl overflow-hidden bg-warm-200 dark:bg-warm-800">
+            <img
+              src="/images/prateek.png"
+              alt="Prateek Mittal"
+              class="w-full h-full object-cover object-top"
+              loading="eager"
+            />
+          </div>
 
-      <!-- Quick Social Links -->
-      <div class="flex flex-wrap items-center gap-x-5 gap-y-2 pt-2 text-sm font-sans text-stone-600 dark:text-stone-400">
-        <a href="mailto:prateekmittal154@gmail.com" class="text-terracotta-500 hover:underline">
-          prateekmittal154@gmail.com
-        </a>
-        <span>·</span>
-        <a href="https://github.com/prateekmittal154" target="_blank" rel="noopener noreferrer" class="hover:text-stone-900 dark:hover:text-stone-100 hover:underline">
-          GitHub
-        </a>
-        <span>·</span>
-        <a href="https://linkedin.com/in/prateek-mittal" target="_blank" rel="noopener noreferrer" class="hover:text-stone-900 dark:hover:text-stone-100 hover:underline">
-          LinkedIn
-        </a>
-        <span>·</span>
-        <a href="/journey" class="hover:text-stone-900 dark:hover:text-stone-100 hover:underline">
-          Journey & CV
-        </a>
+          <!-- Structured Credentials -->
+          <div class="space-y-2 text-xs font-sans text-stone-600 dark:text-stone-300 divide-y divide-warm-200/80 dark:divide-warm-800/80">
+            <div class="flex justify-between items-baseline pt-1">
+              <span class="text-stone-400">Current Role</span>
+              <span class="font-medium text-stone-900 dark:text-stone-100 text-right">AI Analyst @ Accenture</span>
+            </div>
+            <div class="flex justify-between items-baseline pt-2">
+              <span class="text-stone-400">Affiliation</span>
+              <span class="font-medium text-stone-900 dark:text-stone-100 text-right">VEDAs Lab · Yale BrainLM</span>
+            </div>
+            <div class="flex justify-between items-baseline pt-2">
+              <span class="text-stone-400">Education</span>
+              <span class="font-medium text-stone-900 dark:text-stone-100 text-right">BITS Pilani (9.50) · TIET (8.83)</span>
+            </div>
+            <div class="flex justify-between items-baseline pt-2">
+              <span class="text-stone-400">Distinction</span>
+              <span class="font-medium text-brick-600 dark:text-brick-500 text-right">MICCAI '26 Travel Grant</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Writing & Poems Index -->
-    <section class="border-t border-warm-200 dark:border-warm-800 pt-10 space-y-6">
-      <div class="flex items-baseline justify-between">
-        <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50">
-          Writings, Poetry & Essays
-        </h2>
-        <a href="/writing" class="text-xs font-sans text-stone-500 dark:text-stone-400 hover:text-terracotta-500">
-          All Writings &rarr;
+    <!-- Highlights Strip: 4 Balanced Columns -->
+    <section class="border-y border-warm-200 dark:border-warm-800 py-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="space-y-1">
+          <span class="text-xs font-sans uppercase tracking-wider text-stone-400 block">Conference</span>
+          <h4 class="font-serif text-lg font-medium text-stone-900 dark:text-stone-100">MICCAI 2026</h4>
+          <p class="text-xs text-stone-500 font-sans">3 Oral Presentations & Travel Grant</p>
+        </div>
+        <div class="space-y-1">
+          <span class="text-xs font-sans uppercase tracking-wider text-stone-400 block">Neuroimaging</span>
+          <h4 class="font-serif text-lg font-medium text-stone-900 dark:text-stone-100">BrainLM (ICLR)</h4>
+          <p class="text-xs text-stone-500 font-sans">Yale 6,700h fMRI Foundation Model</p>
+        </div>
+        <div class="space-y-1">
+          <span class="text-xs font-sans uppercase tracking-wider text-stone-400 block">Journal Theory</span>
+          <h4 class="font-serif text-lg font-medium text-stone-900 dark:text-stone-100">TMLR 2026</h4>
+          <p class="text-xs text-stone-500 font-sans">Robust High-Dim Subsampling</p>
+        </div>
+        <div class="space-y-1">
+          <span class="text-xs font-sans uppercase tracking-wider text-stone-400 block">Social Action</span>
+          <h4 class="font-serif text-lg font-medium text-stone-900 dark:text-stone-100">Pratigya Abhiyan</h4>
+          <p class="text-xs text-stone-500 font-sans">Academic Head & Volunteer (4 Years)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Writings & Musings (2-Column Grid Across Full Width) -->
+    <section class="space-y-6">
+      <div class="flex items-baseline justify-between border-b border-warm-200 dark:border-warm-800 pb-3">
+        <div class="space-y-1">
+          <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50">
+            Writings, Poetry & Essays
+          </h2>
+          <p class="text-xs text-stone-500 font-sans">
+            Reflections across medical AI, ethics, grassroots memoirs, and Hindi & English verse.
+          </p>
+        </div>
+        <a href="/writing" class="text-xs font-sans text-brick-600 dark:text-brick-500 hover:underline font-medium">
+          View all writings &rarr;
         </a>
       </div>
 
-      <div class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {writings.slice(0, 4).map((post) => (
-          <article class="group space-y-1">
-            <div class="flex items-baseline justify-between gap-4">
-              <h3 class="text-lg font-serif font-medium text-stone-900 dark:text-stone-100 group-hover:text-terracotta-500 transition-colors">
+          <article class="p-5 rounded-xl border border-warm-200/90 dark:border-warm-800/90 bg-warm-50/50 dark:bg-warm-900/40 hover:border-brick-500/50 transition-all flex flex-col justify-between space-y-3 group">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between text-xs font-sans text-stone-400">
+                <span class="text-brick-600 dark:text-brick-500 font-medium uppercase text-[11px] tracking-wider">
+                  {post.data.category === 'poetry' ? 'Poetry' : post.data.category === 'memoirs' ? 'Memoir' : post.data.category === 'philosophy' ? 'Philosophy' : 'AI & Science'}
+                </span>
+                <time datetime={post.data.date.toISOString()}>
+                  {new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' }).format(post.data.date)}
+                </time>
+              </div>
+
+              <h3 class="text-lg font-serif font-medium text-stone-900 dark:text-stone-100 group-hover:text-brick-600 dark:group-hover:text-brick-500 transition-colors leading-snug">
                 <a href={`/writing/${post.slug}`}>
                   {post.data.title}
                 </a>
               </h3>
-              <time datetime={post.data.date.toISOString()} class="text-xs font-sans text-stone-400 dark:text-stone-500 flex-shrink-0">
-                {new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' }).format(post.data.date)}
-              </time>
+
+              <p class="text-sm text-stone-600 dark:text-stone-400 font-sans line-clamp-3 leading-relaxed text-left">
+                {post.data.description}
+              </p>
             </div>
-            <p class="text-sm text-stone-600 dark:text-stone-400 line-clamp-2 leading-relaxed">
-              {post.data.description}
-            </p>
+
+            <div class="pt-2 text-xs font-sans text-brick-600 dark:text-brick-500 font-medium flex items-center justify-between">
+              <span>{post.data.readingTime || '5 min read'}</span>
+              <a href={`/writing/${post.slug}`} class="group-hover:translate-x-0.5 transition-transform">
+                Read piece &rarr;
+              </a>
+            </div>
           </article>
         ))}
       </div>
     </section>
 
-    <!-- Selected Academic Research -->
-    <section class="border-t border-warm-200 dark:border-warm-800 pt-10 space-y-6">
-      <div class="flex items-baseline justify-between">
-        <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50">
-          Selected Research
-        </h2>
-        <a href="/research" class="text-xs font-sans text-stone-500 dark:text-stone-400 hover:text-terracotta-500">
-          Complete Archive (15+ papers) &rarr;
+    <!-- Selected Academic Publications -->
+    <section class="space-y-6">
+      <div class="flex items-baseline justify-between border-b border-warm-200 dark:border-warm-800 pb-3">
+        <div class="space-y-1">
+          <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50">
+            Selected Publications
+          </h2>
+          <p class="text-xs text-stone-500 font-sans">
+            Peer-reviewed papers across medical image computing, robust learning, and healthcare AI governance.
+          </p>
+        </div>
+        <a href="/research" class="text-xs font-sans text-brick-600 dark:text-brick-500 hover:underline font-medium">
+          Complete archive (15+ works) &rarr;
         </a>
       </div>
 
-      <p class="text-sm text-stone-600 dark:text-stone-400">
-        Selected papers across medical image computing (MICCAI 2026), whole-brain foundation models (BrainLM at ICLR), robust statistics (TMLR), and healthcare AI accountability.
-      </p>
-
-      <div class="space-y-5">
+      <div class="space-y-6">
         {featuredPapers.map((pub) => (
-          <div class="space-y-1 text-sm">
-            <div class="font-serif font-medium text-stone-900 dark:text-stone-100 text-base">
-              {pub.url ? (
-                <a href={pub.url} target="_blank" rel="noopener noreferrer" class="hover:text-terracotta-500 hover:underline">
-                  {pub.title}
-                </a>
-              ) : (
-                pub.title
-              )}
-            </div>
-            <div class="text-xs text-stone-600 dark:text-stone-400">
-              {pub.authors.join(', ')}
-            </div>
-            <div class="text-xs italic text-stone-500 dark:text-stone-400">
-              {pub.venue} ({pub.year})
-            </div>
-          </div>
+          <PublicationCard pub={pub} />
         ))}
       </div>
     </section>
 
-    <!-- Moments Teaser -->
-    <section class="border-t border-warm-200 dark:border-warm-800 pt-10 space-y-4">
-      <div class="flex items-baseline justify-between">
-        <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50">
-          Moments & Fragments
-        </h2>
-        <a href="/moments" class="text-xs font-sans text-stone-500 dark:text-stone-400 hover:text-terracotta-500">
-          View Visual Diary &rarr;
+    <!-- Moments Teaser: 3 Column Photo Strip -->
+    <section class="space-y-6">
+      <div class="flex items-baseline justify-between border-b border-warm-200 dark:border-warm-800 pb-3">
+        <div class="space-y-1">
+          <h2 class="text-2xl font-serif font-medium text-warm-900 dark:text-warm-50">
+            Moments & Visual Diary
+          </h2>
+          <p class="text-xs text-stone-500 font-sans">
+            Glimpses from conference journeys, whiteboard derivations, and grassroots classrooms.
+          </p>
+        </div>
+        <a href="/moments" class="text-xs font-sans text-brick-600 dark:text-brick-500 hover:underline font-medium">
+          View all photos &rarr;
         </a>
       </div>
-      <p class="text-sm text-stone-600 dark:text-stone-400">
-        Photographs and snapshots between conference travels in Strasbourg, laboratory whiteboards, Pratigya classrooms, and quiet reading corners.
-      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        {previewMoments.map((m) => (
+          <div class="group rounded-xl overflow-hidden border border-warm-200 dark:border-warm-800 bg-warm-100 dark:bg-warm-900/60 shadow-sm space-y-2">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src={m.imageUrl}
+                alt={m.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-3 pt-1 space-y-1">
+              <span class="text-[10px] font-sans text-brick-600 dark:text-brick-500 uppercase tracking-wider block">
+                {m.location || m.category}
+              </span>
+              <h4 class="font-serif text-sm font-medium text-stone-900 dark:text-stone-100 line-clamp-1">
+                {m.title}
+              </h4>
+              <p class="text-xs text-stone-500 font-sans line-clamp-2 leading-relaxed">
+                {m.caption}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
 
   </div>

@@ -28,12 +28,12 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 ---
 
 <BaseLayout title={`${title} — Prateek Mittal`} description={description} image={coverImage}>
-  <article class="max-w-2xl mx-auto px-6 py-12 md:py-16 space-y-10">
+  <article class="max-w-3xl mx-auto px-6 sm:px-8 py-8 sm:py-12 space-y-8 sm:space-y-10">
     <!-- Back Navigation -->
     <div>
       <a
         href="/writing"
-        class="text-xs font-sans text-stone-500 dark:text-stone-400 hover:text-terracotta-500 inline-flex items-center gap-1"
+        class="text-xs font-sans text-stone-500 dark:text-stone-400 hover:text-brick-600 dark:hover:text-brick-500 inline-flex items-center gap-1 font-medium"
       >
         <span>&larr;</span>
         <span>Back to writings</span>
@@ -41,16 +41,20 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     </div>
 
     <!-- Header -->
-    <header class={`space-y-4 ${category === 'poetry' ? 'text-center' : ''}`}>
+    <header class={`space-y-4 border-b border-warm-200 dark:border-warm-800 pb-8 ${category === 'poetry' ? 'text-center' : ''}`}>
+      <div class={`text-xs font-sans uppercase tracking-wider text-brick-600 dark:text-brick-500 font-semibold ${category === 'poetry' ? 'text-center' : ''}`}>
+        {category === 'poetry' ? 'Poetry' : category === 'memoirs' ? 'Memoir' : category === 'philosophy' ? 'Philosophy' : 'Research Notes'}
+      </div>
+
       <h1 class={`text-3xl sm:text-4xl md:text-5xl font-serif font-medium text-warm-900 dark:text-warm-50 leading-tight ${language === 'hi' || language === 'both' ? 'font-devanagari' : ''}`}>
         {title}
       </h1>
 
-      <p class="text-base sm:text-lg text-stone-600 dark:text-stone-400 font-serif italic leading-relaxed">
+      <p class="text-base sm:text-lg text-stone-600 dark:text-stone-400 font-serif italic leading-relaxed text-left">
         {description}
       </p>
 
-      <div class={`flex flex-wrap items-center gap-3 text-xs font-sans text-stone-400 border-b border-warm-200 dark:border-warm-800 pb-4 ${category === 'poetry' ? 'justify-center' : ''}`}>
+      <div class={`flex flex-wrap items-center gap-3 text-xs font-sans text-stone-400 pt-2 ${category === 'poetry' ? 'justify-center' : ''}`}>
         <time datetime={date.toISOString()}>{formattedDate}</time>
         <span>·</span>
         <span>{readingTime || '5 min read'}</span>
@@ -67,7 +71,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
       </div>
 
       {epigraph && (
-        <blockquote class="italic text-stone-700 dark:text-stone-300 border-l-2 border-terracotta-500 pl-4 py-2 text-base my-6">
+        <blockquote class="italic text-stone-700 dark:text-stone-300 border-l-2 border-brick-500 pl-4 py-2 text-base my-6 text-left">
           "{epigraph}"
         </blockquote>
       )}
@@ -75,18 +79,18 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 
     <!-- Cover Image if present -->
     {coverImage && (
-      <div class="rounded-xl overflow-hidden border border-warm-200 dark:border-warm-800">
+      <div class="rounded-xl overflow-hidden border border-warm-200 dark:border-warm-800 shadow-sm">
         <img
           src={coverImage}
           alt={title}
-          class="w-full max-h-[400px] object-cover"
+          class="w-full max-h-[460px] object-cover"
           loading="lazy"
         />
       </div>
     )}
 
-    <!-- Content Body -->
-    <div class="prose prose-stone dark:prose-invert max-w-none font-serif text-lg leading-relaxed text-stone-800 dark:text-stone-200">
+    <!-- Content Body with Justified Text -->
+    <div class={`prose prose-stone dark:prose-invert max-w-none font-serif text-lg leading-relaxed text-stone-800 dark:text-stone-200 ${category === 'poetry' ? '' : 'text-justified hyphens-auto'}`}>
       <slot />
     </div>
 
@@ -98,11 +102,11 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
         </div>
         <div>
           <span class="font-serif font-medium text-stone-900 dark:text-stone-100 block">Prateek Mittal</span>
-          <span class="text-xs font-sans text-stone-500">Gurugram, India</span>
+          <span class="text-xs font-sans text-stone-500">AI Decision Science & Medical AI</span>
         </div>
       </div>
 
-      <a href="/writing" class="text-xs font-sans text-terracotta-500 hover:underline">
+      <a href="/writing" class="text-xs font-sans text-brick-600 dark:text-brick-500 hover:underline font-medium">
         More writings &rarr;
       </a>
     </div>

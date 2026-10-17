@@ -5,42 +5,51 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Lora', 'Georgia', 'serif'],
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        serif: ['Newsreader', 'Lora', 'Georgia', 'serif'],
         devanagari: ['Noto Serif Devanagari', 'Lora', 'serif'],
         mono: ['JetBrains Mono', 'Menlo', 'monospace'],
       },
       colors: {
         warm: {
-          50: '#FAF7F2',
-          100: '#F3EFE7',
-          200: '#E6DFD3',
+          50: '#FAF8F5',
+          100: '#F4EFE8',
+          200: '#E7E0D5',
           300: '#D5CBBF',
+          400: '#A89E91',
           700: '#3D3934',
           800: '#23211F',
-          900: '#161514',
+          900: '#14161A',
+          950: '#0D1015',
+        },
+        brick: {
+          500: '#9E3D2A',
+          600: '#853221',
+          700: '#6C2719',
         },
         terracotta: {
-          500: '#8C3B2D',
-          600: '#753024',
-          700: '#5F261C',
+          500: '#9E3D2A',
+          600: '#853221',
+          700: '#6C2719',
         },
       },
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            maxWidth: '66ch',
+            maxWidth: '100%',
             color: 'inherit',
-            fontFamily: theme('fontFamily.serif').join(','),
-            lineHeight: '1.8',
+            lineHeight: '1.85',
+            p: {
+              marginBottom: '1.5em',
+            },
             a: {
               color: 'inherit',
               textDecoration: 'underline',
               textUnderlineOffset: '4px',
               textDecorationThickness: '1px',
-              textDecorationColor: theme('colors.terracotta.500'),
+              textDecorationColor: theme('colors.brick.500'),
               '&:hover': {
-                color: theme('colors.terracotta.500'),
+                color: theme('colors.brick.500'),
               },
             },
             'h1, h2, h3, h4': {
@@ -49,7 +58,7 @@ export default {
               fontWeight: '500',
             },
             blockquote: {
-              borderLeftColor: theme('colors.terracotta.500'),
+              borderLeftColor: theme('colors.brick.500'),
               fontStyle: 'italic',
             },
           },

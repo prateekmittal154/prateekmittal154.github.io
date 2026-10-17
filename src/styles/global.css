@@ -1,5 +1,5 @@
 @import 'katex/dist/katex.min.css';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Noto+Serif+Devanagari:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Noto+Serif+Devanagari:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,57 +7,99 @@
 
 @layer base {
   :root {
-    --bg-page: #FAF7F2;
-    --text-main: #1D1B18;
-    --text-muted: #6B665F;
-    --border-soft: #E8E2D8;
-    --accent-warm: #8C3B2D;
-    --accent-subtle: #F0EAE1;
+    --bg-page: #FAF8F5;
+    --bg-surface: #FFFFFF;
+    --text-main: #18191B;
+    --text-secondary: #4A4D54;
+    --text-muted: #737882;
+    --border-soft: #E5E0D8;
+    --border-strong: #D1CAC0;
+    --accent-brick: #9E3D2A;
+    --accent-subtle: #F3EFE9;
   }
 
   .dark {
-    --bg-page: #161514;
-    --text-main: #EDE8E1;
-    --text-muted: #9E988F;
-    --border-soft: #2B2824;
-    --accent-warm: #D4715E;
-    --accent-subtle: #242220;
+    --bg-page: #0D1015;
+    --bg-surface: #141820;
+    --text-main: #F0F2F5;
+    --text-secondary: #A0A6B2;
+    --text-muted: #6B7280;
+    --border-soft: #1E2530;
+    --border-strong: #2B3444;
+    --accent-brick: #E06D53;
+    --accent-subtle: #19202B;
   }
 
   body {
     background-color: var(--bg-page);
     color: var(--text-main);
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.05rem;
-    line-height: 1.75;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: background-color 0.25s ease, color 0.25s ease;
   }
 
-  h1, h2, h3, h4 {
-    font-family: 'Lora', Georgia, serif;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Newsreader', 'Lora', Georgia, serif;
     color: var(--text-main);
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
+    font-optical-sizing: auto;
+    font-feature-settings: "kern" 1, "liga" 1;
+    text-wrap: balance;
   }
 
   ::selection {
     background-color: #EBD8CB;
-    color: #1D1B18;
+    color: #18191B;
   }
 
   .dark ::selection {
     background-color: #4A2B24;
-    color: #EDE8E1;
+    color: #F0F2F5;
   }
 }
 
-/* Human Typography Utilities */
-.font-sans-ui {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+/* =========================================================================
+   Book-Grade Editorial Text Justification & Typographical Discipline
+   ========================================================================= */
+
+/* Justify long-form paragraphs with hyphenation across browsers */
+.text-justified,
+.text-justified p,
+.prose p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  word-break: normal;
 }
 
-.font-serif-book {
+/* Strictly ensure headings, lists, code, and captions are NEVER justified */
+h1, h2, h3, h4, h5, h6,
+.text-justified h1, .text-justified h2, .text-justified h3, .text-justified h4,
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  text-align: left !important;
+  text-wrap: balance;
+}
+
+ul, ol, li,
+.text-justified ul, .text-justified ol, .text-justified li,
+.prose ul, .prose ol, .prose li {
+  text-align: left;
+}
+
+pre, code, kbd, samp, figcaption,
+.text-justified pre, .text-justified code, .text-justified figcaption,
+.prose pre, .prose code, .prose figcaption {
+  text-align: left;
+}
+
+.font-serif-title {
+  font-family: 'Newsreader', 'Lora', Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+.font-serif-body {
   font-family: 'Lora', Georgia, serif;
 }
 
@@ -71,7 +113,7 @@
   font-size: 1.25rem;
   line-height: 2.3;
   color: var(--text-main);
-  max-width: 42ch;
+  max-width: 44ch;
   margin: 3.5rem auto;
   padding: 1rem;
 }
@@ -93,7 +135,7 @@
   color: var(--text-muted);
 }
 
-/* Simple, honest scrollbar */
+/* Smooth Minimal Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

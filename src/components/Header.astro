@@ -12,12 +12,15 @@ const navItems = [
 const pathname = Astro.url.pathname;
 ---
 
-<header class="border-b border-warm-200/80 dark:border-warm-800/80 transition-colors">
-  <div class="max-w-3xl mx-auto px-6 h-18 py-5 flex items-center justify-between">
+<header class="border-b border-warm-200/80 dark:border-warm-800/80 bg-warm-50/70 dark:bg-warm-950/70 backdrop-blur-md sticky top-0 z-50 transition-colors">
+  <div class="max-w-5xl mx-auto px-6 sm:px-8 h-18 py-4 flex items-center justify-between">
     <!-- Name / Home Link -->
-    <a href="/" class="group flex items-baseline gap-2">
-      <span class="font-serif text-xl sm:text-2xl font-medium tracking-tight text-warm-900 dark:text-warm-50 group-hover:text-terracotta-500 transition-colors">
+    <a href="/" class="group flex items-baseline gap-2.5">
+      <span class="font-serif text-xl sm:text-2xl font-medium tracking-tight text-warm-900 dark:text-warm-50 group-hover:text-brick-500 transition-colors">
         Prateek Mittal
+      </span>
+      <span class="hidden md:inline-block text-xs text-stone-400 font-sans tracking-normal">
+        · Decision Science & Medical AI
       </span>
     </a>
 
@@ -28,13 +31,16 @@ const pathname = Astro.url.pathname;
         return (
           <a
             href={item.href}
-            class={`transition-colors py-1 ${
+            class={`transition-colors py-1 relative ${
               isActive
-                ? 'text-terracotta-500 font-semibold underline decoration-terracotta-500 decoration-2 underline-offset-8'
+                ? 'text-brick-600 dark:text-brick-500 font-semibold'
                 : 'text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-stone-100'
             }`}
           >
             {item.label}
+            {isActive && (
+              <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-brick-600 dark:bg-brick-500 rounded-full" />
+            )}
           </a>
         );
       })}
@@ -61,16 +67,23 @@ const pathname = Astro.url.pathname;
   </div>
 
   <!-- Mobile Dropdown -->
-  <div id="mobile-menu" class="hidden sm:hidden border-t border-warm-200 dark:border-warm-800 bg-warm-100/60 dark:bg-warm-900/60 px-6 py-4">
+  <div id="mobile-menu" class="hidden sm:hidden border-t border-warm-200 dark:border-warm-800 bg-warm-100/90 dark:bg-warm-900/90 backdrop-blur-md px-6 py-4">
     <div class="flex flex-col gap-3 font-sans text-sm">
-      {navItems.map((item) => (
-        <a
-          href={item.href}
-          class="py-1 text-stone-700 dark:text-stone-300 hover:text-terracotta-500"
-        >
-          {item.label}
-        </a>
-      ))}
+      {navItems.map((item) => {
+        const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+        return (
+          <a
+            href={item.href}
+            class={`py-1.5 transition-colors ${
+              isActive
+                ? 'text-brick-600 dark:text-brick-500 font-semibold'
+                : 'text-stone-700 dark:text-stone-300 hover:text-brick-600 dark:hover:text-brick-500'
+            }`}
+          >
+            {item.label}
+          </a>
+        );
+      })}
     </div>
   </div>
 </header>
