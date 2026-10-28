@@ -6,7 +6,7 @@ import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://prateekmittal.me', // Change to https://<username>.github.io if deploying to standard GitHub Pages
+  site: 'https://prateekmittal154.github.io',
   integrations: [
     tailwind({
       applyBaseStyles: true,
