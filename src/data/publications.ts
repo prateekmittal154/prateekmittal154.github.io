@@ -16,6 +16,25 @@ export interface Publication {
 export const publications: Publication[] = [
   // --- PEER-REVIEWED JOURNALS ---
   {
+    id: 'scientific-reports-2026-hcc-spatial-coordination',
+    title: 'Spatial multicellular coordination networks are associated with neoadjuvant immunotherapy response in hepatocellular carcinoma',
+    authors: ['Prateek Mittal', 'Joohi Chauhan', 'Prabal Pratap Singh'],
+    venue: 'Scientific Reports (Nature Portfolio)',
+    year: 2026,
+    type: 'journal',
+    badges: ['Journal', 'Spatial Transcriptomics', 'HCC'],
+    doi: '10.1038/s41598-026-74108-z',
+    url: 'https://doi.org/10.1038/s41598-026-74108-z',
+    abstract: 'Spatial transcriptomics analysis exploring whether multicellular coordination patterns are associated with response to neoadjuvant immunotherapy in a small HCC cohort; findings require further validation.',
+    bibtex: `@article{mittal2026spatial,
+  title={Spatial multicellular coordination networks are associated with neoadjuvant immunotherapy response in hepatocellular carcinoma},
+  author={Mittal, Prateek and Chauhan, Joohi and Singh, Prabal Pratap},
+  journal={Scientific Reports},
+  year={2026},
+  doi={10.1038/s41598-026-74108-z}
+}`,
+  },
+  {
     id: 'tmlr-2026-subsampling',
     title: 'Adaptive and Stratified Subsampling for High-Dimensional Robust Estimation',
     authors: ['Prateek Mittal', 'Joohi Chauhan'],
