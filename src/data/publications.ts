@@ -18,7 +18,7 @@ export const publications: Publication[] = [
   {
     id: 'scientific-reports-2026-hcc-spatial-coordination',
     title: 'Spatial multicellular coordination networks are associated with neoadjuvant immunotherapy response in hepatocellular carcinoma',
-    authors: ['Prateek Mittal', 'Joohi Chauhan', 'Prabal Pratap Singh'],
+    authors: ['Prateek Mittal', 'et al.'],
     venue: 'Scientific Reports (Nature Portfolio)',
     year: 2026,
     type: 'journal',
@@ -28,7 +28,7 @@ export const publications: Publication[] = [
     abstract: 'Spatial transcriptomics analysis exploring whether multicellular coordination patterns are associated with response to neoadjuvant immunotherapy in a small HCC cohort; findings require further validation.',
     bibtex: `@article{mittal2026spatial,
   title={Spatial multicellular coordination networks are associated with neoadjuvant immunotherapy response in hepatocellular carcinoma},
-  author={Mittal, Prateek and Chauhan, Joohi and Singh, Prabal Pratap},
+  author={Mittal, Prateek and others},
   journal={Scientific Reports},
   year={2026},
   doi={10.1038/s41598-026-74108-z}
