@@ -33,7 +33,7 @@ export const moments: Moment[] = [
   {
     id: 'miccai-strasbourg',
     title: 'MICCAI 2026 & Strasbourg Journeys',
-    caption: 'Presenting research on inverse protocol prediction and brain morphometry amidst the historic canals and cathedral of Strasbourg.',
+    caption: 'Research travel and conversations around microscopy, brain morphometry and biomedical AI.',
     date: 'Autumn 2026',
     location: 'Strasbourg, France',
     category: 'research',
@@ -53,7 +53,7 @@ export const moments: Moment[] = [
   {
     id: 'lab-whiteboard',
     title: 'Differential Geometry & Brain Lesions',
-    caption: 'Late night derivations of Laplace-Beltrami spectra and marching-cubes surface reconstructions at the VEDAs Lab.',
+    caption: 'An illustration of the mathematical and computational questions behind geometric analysis of brain lesions.',
     date: '2025',
     location: 'VEDAs Research Lab',
     category: 'research',
@@ -83,7 +83,7 @@ export const moments: Moment[] = [
   {
     id: 'ai-ethics-dialogue',
     title: 'Ethical AI & Clinical Governance',
-    caption: 'Convening dialogue between clinicians and engineers at the Foundation for Ethical AI in Healthcare.',
+    caption: 'Research and discussions about the evidence and accountability required for responsible healthcare AI.',
     date: '2026',
     location: 'Faridabad, India',
     category: 'philosophy',
