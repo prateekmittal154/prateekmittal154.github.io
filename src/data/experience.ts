@@ -87,7 +87,7 @@ export const experiences: ExperienceItem[] = [
     role: 'Founder; Chairman & Managing Director',
     organization: 'Foundation for Ethical AI in Healthcare',
     location: 'Faridabad, India',
-    period: 'Apr 2026 – Present',
+    period: 'Mar 2026 – Present',
     type: 'leadership',
     description: [
       'Founded a Section 8 non-profit initiative focused on ethical, clinically responsible AI adoption in Indian healthcare.',
