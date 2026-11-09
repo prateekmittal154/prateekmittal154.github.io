@@ -6,16 +6,16 @@ export interface SocialLink {
 
 export const profile = {
   name: 'Prateek Mittal',
-  tagline: 'AI Decision Science Analyst · Medical AI Researcher · Writer',
+  tagline: 'Biomedical AI Researcher · AI Engineer · Founder, FEAIH',
   roles: [
     'AI Decision Science Analyst @ Accenture Strategy & Consulting',
     'Medical AI Researcher collaborating with MNNIT Allahabad (VEDAs Lab)',
     'Independent Researcher · Formative Yale BrainLM Collaborator (2024)',
     'Founder @ Foundation for Ethical AI in Healthcare (FEAIH)',
     'Former Academic Head @ Pratigya Abhiyan (Grassroots Education)',
-    'M.Sc. Data Science & AI @ BITS Pilani (9.50 CGPA)',
+    'M.Sc. Data Science & AI @ BITS Pilani (in progress)',
   ],
-  bio: `AI Decision Science Analyst at Accenture Strategy & Consulting and medical AI researcher collaborating closely with Motilal Nehru National Institute of Technology (MNNIT) Allahabad (VEDAs Lab) under Dr. Joohi Chauhan and Dr. Prabal Pratap Singh, with formative early research at Yale University (BrainLM, 2024 with David van Dijk). My work spans high-dimensional learning theory (TMLR 2026), clinical foundation models (MICCAI 2026, 3 Orals & Travel Grant), and healthcare AI accountability. Grounded by four undergraduate years teaching with Pratigya Abhiyan, I also write Hindi and English poetry.`,
+  bio: `AI Decision Science Analyst at Accenture Strategy & Consulting and medical AI researcher collaborating closely with Motilal Nehru National Institute of Technology (MNNIT) Allahabad (VEDAs Lab) under Dr. Joohi Chauhan and Dr. Prabal Pratap Singh, with formative early research at Yale University (BrainLM, 2024 with David van Dijk). My work spans robust statistical learning, microscopy, medical imaging, spatial omics, and healthcare AI governance. Grounded by four undergraduate years teaching with Pratigya Abhiyan, I also write Hindi and English poetry.`,
   location: 'Gurugram & Faridabad, India',
   email: 'prateekmittal154@gmail.com',
   calendly: 'https://calendly.com/prateekmittal154/30min',
